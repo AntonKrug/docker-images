@@ -13,7 +13,7 @@ $(SUBDIRS):
 	$(eval IMAGE=$(@:/.=))
 	echo "Building: ${DOCKER_USER}/${IMAGE}:${TAG}"
 	@docker build -t ${DOCKER_USER}/${IMAGE}:${TAG} ./${IMAGE}
-	@docker tag ${DOCKER_USER}/${IMAGE}:${TAG} ${DOCKER_USER}/${IMAGE}:latest
+	@docker tag -f ${DOCKER_USER}/${IMAGE}:${TAG} ${DOCKER_USER}/${IMAGE}:latest
 	@docker push ${DOCKER_USER}/${IMAGE}
 
 
