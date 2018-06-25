@@ -18,6 +18,6 @@ RUN apt-get clean
 RUN mkdir ~/.vnc
 RUN x11vnc -storepasswd password ~/.vnc/passwd
 
-CMD ["export", "HOME=/root/"]
+ENV HOME=/root/
 
 VOLUME /docker_shares/common
