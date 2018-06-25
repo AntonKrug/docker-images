@@ -3,7 +3,7 @@
 FROM debian:9.4-slim
 MAINTAINER Anton Krug <anton.krgu@microsemi.com>
 
-RUN apt-get update && apt-get install -y build-essential xdg-utils wget vim mc net-tools aptitude p7zip-full firefox-esr gedit x11-apps x11vnc xvfb
+RUN apt-get update && apt-get install -y build-essential xdg-utils wget git vim mc net-tools aptitude p7zip-full firefox-esr gedit x11-apps x11vnc xvfb
 
 RUN dpkg --add-architecture i386 && apt-get update && apt-get install -y libstdc++6:i386
 
