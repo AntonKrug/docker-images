@@ -1,6 +1,7 @@
 SUBDIRS   := $(wildcard */.)
 MAKEFLAGS := --jobs=1  # force sequential execution as docker doesn't like concurent
 $(eval TAG=$(shell git log -1 --pretty=%h))
+VARIABLES = '$SOFTCONSOLE_INTERANET_BASE_URL $SOFTCONSOLE_5_3'
 
 
 .PHONY: all $(SUBDIRS)
@@ -12,7 +13,7 @@ $(SUBDIRS):
 	echo
 	$(eval IMAGE=$(@:/.=))
 	echo "Building: ${DOCKER_USER}/${IMAGE}:${TAG}"
-	cat ./${IMAGE}/Dockerfile | envsubst | docker build -t ${DOCKER_USER}/${IMAGE}:${TAG} -
+	cat ./${IMAGE}/Dockerfile | envsubst ${VARIABLES} | docker build -t ${DOCKER_USER}/${IMAGE}:${TAG} -
 	@docker tag -f ${DOCKER_USER}/${IMAGE}:${TAG} ${DOCKER_USER}/${IMAGE}:latest
 	@docker push ${DOCKER_USER}/${IMAGE}
 
