@@ -1,7 +1,7 @@
 SUBDIRS   := $(wildcard */.)
 MAKEFLAGS := --jobs=1  # force sequential execution as docker doesn't like concurent
 $(eval TAG=$(shell git log -1 --pretty=%h))
-VARIABLES = '$SOFTCONSOLE_INTERANET_BASE_URL $SOFTCONSOLE_5_3'
+VARIABLES = '$$SOFTCONSOLE_INTERANET_BASE_URL $$SOFTCONSOLE_5_3'
 
 
 .PHONY: all $(SUBDIRS)
