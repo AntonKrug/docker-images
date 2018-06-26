@@ -6,6 +6,7 @@ MAINTAINER Anton Krug <anton.krgu@microsemi.com>
 RUN mkdir -p /opt/microsemi
 RUN cd /opt/microsemi && wget -q ftp://$SOFTCONSOLE_INTERANET_BASE_URL/$SOFTCONSOLE_5_3.7z && 7za x $SOFTCONSOLE_5_3.7z && rm $SOFTCONSOLE_5_3.7z
 RUN ln -s /opt/microsemi/$SOFTCONSOLE_5_3 /opt/microsemi/softconsole
+RUN chmod -R a+rw /opt/*
 
 ENV SWT_GTK3=0
 ENV SC_INSTALL_DIR=/opt/microsemi/softconsole
