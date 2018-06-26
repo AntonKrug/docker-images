@@ -12,7 +12,7 @@ $(SUBDIRS):
 	echo
 	$(eval IMAGE=$(@:/.=))
 	echo "Building: ${DOCKER_USER}/${IMAGE}:${TAG}"
-	@docker build -t ${DOCKER_USER}/${IMAGE}:${TAG} ./${IMAGE}
+	@docker build -f (envsubst < ./${IMAGE}/Dockerfile) -t ${DOCKER_USER}/${IMAGE}:${TAG} ./${IMAGE}
 	@docker tag -f ${DOCKER_USER}/${IMAGE}:${TAG} ${DOCKER_USER}/${IMAGE}:latest
 	@docker push ${DOCKER_USER}/${IMAGE}
 
