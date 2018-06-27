@@ -13,6 +13,9 @@ $(SUBDIRS):
 	echo
 	$(eval IMAGE=$(@:/.=))
 	echo "Building: ${DOCKER_USER}/${IMAGE}:${TAG}"
+	$(eval BASE_IMAGE=`cat ./${IMAGE}/Dockerfile | grep FROM | cut -d' '  -f2`)
+	echo Make sure we are using the newest base image: ${BASE_IMAGE}
+	@docker pull ${BASE_IMAGE}
 	cat ./${IMAGE}/Dockerfile | envsubst ${VARIABLES} | docker build -t ${DOCKER_USER}/${IMAGE}:${TAG} -
 	@docker tag -f ${DOCKER_USER}/${IMAGE}:${TAG} ${DOCKER_USER}/${IMAGE}:latest
 	@docker push ${DOCKER_USER}/${IMAGE}
