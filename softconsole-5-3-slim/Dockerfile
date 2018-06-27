@@ -5,7 +5,7 @@ MAINTAINER Anton Krug <anton.krgu@microsemi.com>
 
 RUN mkdir -p /opt/microsemi && \
     cd /opt/microsemi && \
-    wget -q ftp://$SOFTCONSOLE_INTERANET_BASE_URL/$SOFTCONSOLE_5_3.7z && \
+    wget -q ftp://$SOFTCONSOLE_INTERANET_BASE_URL/$SOFTCONSOLE_5_3_BASE.29-20180627-191616.7z && \
     7za x $SOFTCONSOLE_5_3.7z && \
     rm $SOFTCONSOLE_5_3.7z && \
     ln -s /opt/microsemi/$SOFTCONSOLE_5_3 /opt/microsemi/softconsole && \
