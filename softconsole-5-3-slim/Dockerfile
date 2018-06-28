@@ -13,6 +13,11 @@ RUN mkdir -p /opt/microsemi/imported_projects && \
     ln -s /opt/microsemi/$SOFTCONSOLE_FULL_CAPTURE /opt/microsemi/softconsole && \
     chmod -R a+rw /opt/*
 
+# Uninstall CppChekclipse as at the moment it's not compatible in headless mode
+RUN cd /opt/microsemi/softconsole/eclipse && \
+    ./eclipse -application org.eclipse.equinox.p2.director -profile SDKProfile -noSplash -roaming -uninstallIU com.googlecode.cppcheclipse.feature.feature.group
+    
+
 ENV SWT_GTK3=0
 ENV SC_INSTALL_DIR=/opt/microsemi/softconsole
 ENV LD_LIBRARY_PATH="/opt/microsemi/softconsole/openocd/bin:$LD_LIBRARY_PATH"
