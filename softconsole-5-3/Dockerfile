@@ -5,7 +5,7 @@ MAINTAINER Anton Krug <anton.krgu@microsemi.com>
 
 ENV SOFTCONSOLE_FULL_CAPTURE scLinux-5.3.0.29-20180628-103959
 
-RUN mkdir -p /opt/microsemi && \
+RUN mkdir -p /opt/microsemi/imported_projects  && \
     cd /opt/microsemi && \
     wget -q ftp://$SOFTCONSOLE_INTRANET_BASE_URL/$SOFTCONSOLE_FULL_CAPTURE.7z && \
     7za x $SOFTCONSOLE_FULL_CAPTURE.7z && \
