@@ -3,12 +3,14 @@
 FROM antonkrug/softconsole-base-slim
 MAINTAINER Anton Krug <anton.krgu@microsemi.com>
 
+ENV SOFTCONSOLE_FULL_CAPTURE scLinux-5.3.0.28-20180625-154600
+
 RUN mkdir -p /opt/microsemi && \
     cd /opt/microsemi && \
-    wget -q ftp://$SOFTCONSOLE_INTERANET_BASE_URL/$SOFTCONSOLE_5_3_BASE.29-20180627-191616.7z && \
-    7za x $SOFTCONSOLE_5_3.7z && \
-    rm $SOFTCONSOLE_5_3.7z && \
-    ln -s /opt/microsemi/$SOFTCONSOLE_5_3 /opt/microsemi/softconsole && \
+    wget -q ftp://$SOFTCONSOLE_INTRANET_BASE_URL/$SOFTCONSOLE_FULL_CAPTURE.7z && \
+    7za x $SOFTCONSOLE_FULL_CAPTURE.7z && \
+    rm $SOFTCONSOLE_FULL_CAPTURE.7z && \
+    ln -s /opt/microsemi/$SOFTCONSOLE_FULL_CAPTURE /opt/microsemi/softconsole && \
     chmod -R a+rw /opt/*
 
 ENV SWT_GTK3=0
