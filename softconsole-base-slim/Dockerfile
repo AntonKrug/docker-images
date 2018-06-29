@@ -3,7 +3,7 @@
 FROM debian:9.4-slim
 MAINTAINER Anton Krug <anton.krgu@microsemi.com>
 
-RUN apt-get update && apt-get install -y build-essential p7zip-full wget && apt-get clean
+RUN apt-get update && apt-get install -y build-essential p7zip-full wget unzip && apt-get clean
 RUN dpkg --add-architecture i386 && apt-get update && apt-get install -y libstdc++6:i386  && apt-get clean
 
 RUN apt-get install -y apt-transport-https dirmngr && \
