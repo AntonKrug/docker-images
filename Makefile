@@ -3,11 +3,16 @@ MAKEFLAGS := --jobs=1  # force sequential execution as docker doesn't like concu
 $(eval TAG=$(shell git log -1 --pretty=%h))
 VARIABLES = '$$SOFTCONSOLE_INTRANET_BASE_URL'
 
-.PHONY: all $(SUBDIRS)
-all: $(SUBDIRS)
-	@docker images
+.PHONY: clean all $(SUBDIRS) login-email login
 
-.PHONY: $(SUBDIRS)
+all: clean $(SUBDIRS)
+	@docker images
+	
+clean:
+	docker ps -a -q -f status=exited | xargs --no-run-if-empty docker rm -v
+	docker images -q -f dangling=true | xargs --no-run-if-empty docker rmi
+
+
 $(SUBDIRS):
 	echo
 	$(eval IMAGE=$(@:/.=))
@@ -20,11 +25,9 @@ $(SUBDIRS):
 	@docker push ${DOCKER_USER}/${IMAGE}
 
 
-.PHONY: login-email
 login-email:
 	@docker login -u ${DOCKER_USER} -e ${DOCKER_EMAIL} -p ${DOCKER_PASS}
 
 
-.PHONY: login
 login:
 	@docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}
