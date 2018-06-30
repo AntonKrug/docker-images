@@ -19,7 +19,7 @@ RUN apt-get install -y apt-transport-https dirmngr && \
     
 # Allow wider privileges on new files so they will be easier to delete, in case they will be created by wrong user on a mounted volume
 RUN echo "" >> /etc/bash.bashrc && \
-    echo "umask 0022" >> /etc/bash.bashrc
+    echo "umask 0000" >> /etc/bash.bashrc
 
 
 ENV HOME=/root/
