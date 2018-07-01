@@ -4,7 +4,9 @@ FROM debian:9.4-slim
 MAINTAINER Anton Krug <anton.krgu@microsemi.com>
 
 # build-essential(make is needed by softconsole, gcc needed by renode) and few fundamental tools
-RUN apt-get update && apt-get install -y build-essential p7zip-full wget unzip && apt-get clean
+RUN apt-get update && \
+    apt-get install -y build-essential wget git vim p7zip-full unzip && \
+    apt-get clean
 
 # fPServer dependancies
 RUN dpkg --add-architecture i386 && apt-get update && apt-get install -y libstdc++6:i386  && apt-get clean
