@@ -16,7 +16,8 @@ RUN mkdir -p /opt/microsemi/imported_projects && \
 
 # Uninstall CppChekclipse as at the moment it's not compatible in headless mode
 RUN cd $SC_INSTALL_DIR/eclipse && \
-    ./eclipse -application org.eclipse.equinox.p2.director -profile SDKProfile -noSplash -roaming -uninstallIU com.googlecode.cppcheclipse.feature.feature.group
+    ./eclipse -application org.eclipse.equinox.p2.director -profile SDKProfile -noSplash -roaming -uninstallIU com.googlecode.cppcheclipse.feature.feature.group && \
+    chmod -R a+rw /opt/*
     
 
 ENV SWT_GTK3=0
