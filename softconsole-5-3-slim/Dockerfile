@@ -1,9 +1,9 @@
 # SoftConsole 5.3 preinstalled
 
 FROM antonkrug/softconsole-base-slim
-MAINTAINER Anton Krug <anton.krgu@microsemi.com>
+MAINTAINER Anton Krug <anton.krug@microsemi.com>
 
-ENV SOFTCONSOLE_FULL_CAPTURE scLinux-5.3.0.30-20180701-134725
+ENV SOFTCONSOLE_FULL_CAPTURE scLinux-5.3.0.30-20180702-105624
 ENV SC_INSTALL_DIR=/opt/microsemi/softconsole
 
 RUN mkdir -p /opt/microsemi/imported_projects && \
@@ -24,6 +24,7 @@ ENV SWT_GTK3=0
 ENV LD_LIBRARY_PATH="$SC_INSTALL_DIR/openocd/bin:$LD_LIBRARY_PATH"
 ENV RENODE_BINARY_LAUNCHER=/usr/bin/mono
 ENV RENODE_BINARY_ARGUMENT=$SC_INSTALL_DIR/renode/bin/Renode.exe
-ENV PATH="$SC_INSTALL_DIR:$SC_INSTALL_DIR/eclipse:$SC_INSTALL_DIR/arm-none-eabi-gcc/bin:$SC_INSTALL_DIR/riscv-unknown-elf-gcc/bin:$PATH"
+ENV PATH_ADDON=$SC_INSTALL_DIR:$SC_INSTALL_DIR/eclipse:$SC_INSTALL_DIR/arm-none-eabi-gcc/bin:$SC_INSTALL_DIR/riscv-unknown-elf-gcc/bin
+ENV PATH="$PATH_ADDON:$PATH"
 
 VOLUME /docker_shares/common
