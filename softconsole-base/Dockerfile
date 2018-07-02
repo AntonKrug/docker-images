@@ -1,7 +1,7 @@
 # All dependancies for SoftConsole install and X11-forwarding/VNC
 
 FROM antonkrug/softconsole-base-slim
-MAINTAINER Anton Krug <anton.krgu@microsemi.com>
+MAINTAINER Anton Krug <anton.krug@microsemi.com>
 
 # build-essential(make is needed by softconsole, gcc needed by renode) and few fundamental tools
 RUN apt-get update && \
