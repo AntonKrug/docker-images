@@ -4,7 +4,7 @@ FROM centos:6.9
 MAINTAINER Anton Krug <anton.krug@microsemi.com>
 
 # Basic dependancies
-RUN yum install -y firefox xorg-x11-apps-7.7-6.el6.x86_64 mc git wget vim curl
+RUN yum install -y firefox xorg-x11-apps-7.7-6.el6.x86_64 mc git wget vim curl && \
     yum clean packages
 
 # Libero dependancies
