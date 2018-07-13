@@ -3,7 +3,7 @@
 FROM antonkrug/softconsole-base
 MAINTAINER Anton Krug <anton.krug@microsemi.com>
 
-ENV SOFTCONSOLE_FULL_CAPTURE scLinux-5.4.0.0-20180713-101216
+ENV SOFTCONSOLE_FULL_CAPTURE scLinux-5.4.0.0-20180713-133936
 ENV SC_INSTALL_DIR=/opt/microsemi/softconsole
 
 RUN mkdir -p /opt/microsemi/imported_projects && \
