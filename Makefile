@@ -76,7 +76,7 @@ $(SUBDIRS):
 		echo "Tagging current hash container as the latest:"; \
 		echo "GITHASH -> latest"; \
 		time cat ./${IMAGE}/Dockerfile | envsubst ${VARIABLES} | docker build -t ${DOCKER_USER}/${IMAGE}:${TAG} -;\
-		docker tag -f ${DOCKER_USER}/${IMAGE}:${TAG} ${DOCKER_USER}/${IMAGE}:latest
+		docker tag -f ${DOCKER_USER}/${IMAGE}:${TAG} ${DOCKER_USER}/${IMAGE}:latest; \
 	fi
 
 	@docker push ${DOCKER_USER}/${IMAGE}
