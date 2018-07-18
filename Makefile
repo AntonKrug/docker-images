@@ -7,7 +7,7 @@ VARIABLES = '$$SOFTCONSOLE_INTRANET_BASE_URL'
 
 
 all: clean $(SUBDIRS) status
-	@echo "Finished all the directory targets $SUBDIRS"
+	@echo "Finished all the directory targets ${SUBDIRS}"
 
 
 all-without-softconsole-final: softconsole-base libero weak build-containers
@@ -51,7 +51,7 @@ $(SUBDIRS):
 	@echo ""
 	@echo "*************************************************************************"
 	$(eval IMAGE=$(@:/.=))
-	@echo "$IMAGE"
+	@echo "${IMAGE}"
 	@echo "*************************************************************************"
 	@echo "Building: ${DOCKER_USER}/${IMAGE}:${TAG}"
 	$(eval BASE_IMAGE=`cat ./${IMAGE}/Dockerfile | grep FROM | cut -d' '  -f2`)
