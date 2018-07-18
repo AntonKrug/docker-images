@@ -1,5 +1,7 @@
+SC_CAPTURE ?= 5.4
 SUBDIRS   := $(wildcard */.)
 MAKEFLAGS := --jobs=1  # force sequential execution as docker doesn't like concurent
+TS := $(shell /bin/date "+%Y-%m-%d-%H-%M-%S")
 $(eval TAG=$(shell git log -1 --pretty=%h))
 VARIABLES = '$$SOFTCONSOLE_INTRANET_BASE_URL'
 
@@ -53,18 +55,30 @@ clean:
 
 
 $(SUBDIRS):
+	$(eval IMAGE=$(@:/.=))
 	@echo ""
 	@echo "*************************************************************************"
-	$(eval IMAGE=$(@:/.=))
 	@echo "${IMAGE}"
 	@echo "*************************************************************************"
+
 	@echo "Building: ${DOCKER_USER}/${IMAGE}:${TAG}"
 	$(eval BASE_IMAGE=`cat ./${IMAGE}/Dockerfile | grep FROM | cut -d' '  -f2`)
 	@echo Make sure we are using the newest base image: ${BASE_IMAGE}
 	@docker pull ${BASE_IMAGE}
-	time cat ./${IMAGE}/Dockerfile | envsubst ${VARIABLES} | docker build -t ${DOCKER_USER}/${IMAGE}:${TAG} -
-	@echo "Tagging current hash as the latest:"
-	docker tag -f ${DOCKER_USER}/${IMAGE}:${TAG} ${DOCKER_USER}/${IMAGE}:latest
+
+	@if [ "${IMAGE}" = "softconsole-5-3" ] || [ "${IMAGE}" = "softconsole-5-3-slim" ];  then \
+		echo "SoftConsole final container tagging is slightly different compared to other containers"; \
+		echo "CAPTURE-GITHASH-TIMESTAMP -> CAPTURE -> latest"; \
+		time cat ./${IMAGE}/Dockerfile | envsubst ${VARIABLES} | docker build -t ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${TS} -;\
+		docker tag -f ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${TS} ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}; \
+		docker tag -f ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${TS} ${DOCKER_USER}/${IMAGE}:latest; \
+	else \
+		echo "Tagging current hash container as the latest:"; \
+		echo "GITHASH -> latest"; \
+		time cat ./${IMAGE}/Dockerfile | envsubst ${VARIABLES} | docker build -t ${DOCKER_USER}/${IMAGE}:${TAG} -;\
+		docker tag -f ${DOCKER_USER}/${IMAGE}:${TAG} ${DOCKER_USER}/${IMAGE}:latest
+	fi
+
 	@docker push ${DOCKER_USER}/${IMAGE}
 
 
