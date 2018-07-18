@@ -6,7 +6,7 @@ VARIABLES = '$$SOFTCONSOLE_INTRANET_BASE_URL'
 .PHONY: clean all $(SUBDIRS) login-email login status
 
 
-all: clean $(SUBDIRS) status
+all: $(SUBDIRS)
 	@echo "Finished all the directory targets ${SUBDIRS}"
 
 
@@ -57,7 +57,7 @@ $(SUBDIRS):
 	$(eval BASE_IMAGE=`cat ./${IMAGE}/Dockerfile | grep FROM | cut -d' '  -f2`)
 	@echo Make sure we are using the newest base image: ${BASE_IMAGE}
 	@docker pull ${BASE_IMAGE}
-	cat ./${IMAGE}/Dockerfile | envsubst ${VARIABLES} | docker build -t ${DOCKER_USER}/${IMAGE}:${TAG} -
+	time cat ./${IMAGE}/Dockerfile | envsubst ${VARIABLES} | docker build -t ${DOCKER_USER}/${IMAGE}:${TAG} -
 	@echo "Tagging current hash as the latest:"
 	docker tag -f ${DOCKER_USER}/${IMAGE}:${TAG} ${DOCKER_USER}/${IMAGE}:latest
 	@docker push ${DOCKER_USER}/${IMAGE}
