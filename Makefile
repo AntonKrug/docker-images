@@ -3,29 +3,34 @@ MAKEFLAGS := --jobs=1  # force sequential execution as docker doesn't like concu
 $(eval TAG=$(shell git log -1 --pretty=%h))
 VARIABLES = '$$SOFTCONSOLE_INTRANET_BASE_URL'
 
-.PHONY: clean all $(SUBDIRS) login-email login status
+.PHONY: clean all $(SUBDIRS) login-email login status list
 
 
-all: $(SUBDIRS)
-	@echo "Finished all the directory targets ${SUBDIRS}"
+all: list $(SUBDIRS)
 
 
-all-without-softconsole-final: softconsole-base libero weak build-containers
+list:
+	@echo "*************************************************************************"
+	@echo "All present subdirectories ${SUBDIRS}"
+	@echo "*************************************************************************"
 
 
-softconsole-base: softconsole-base softconsole-base-slim
+all-without-softconsole-final: softconsole-base-images libero weak build-containers
 
 
-softconsole-final: softconsole-5-3 softconsole-5-3-slim
+softconsole-base-images: softconsole-base/. softconsole-base-slim/.
 
 
-libero: libero11-8
+softconsole-final: softconsole-5-3/. softconsole-5-3-slim/.
 
 
-weak: weak-ubuntu16
+libero: libero11-8/.
 
 
-build-containers: debian9.4-cmake-mingw
+weak: weak-ubuntu16/.
+
+
+build-containers: debian9.4-cmake-mingw/.
 
 
 status:
