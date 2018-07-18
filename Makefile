@@ -3,9 +3,31 @@ MAKEFLAGS := --jobs=1  # force sequential execution as docker doesn't like concu
 $(eval TAG=$(shell git log -1 --pretty=%h))
 VARIABLES = '$$SOFTCONSOLE_INTRANET_BASE_URL'
 
-.PHONY: clean all $(SUBDIRS) login-email login
+.PHONY: clean all $(SUBDIRS) login-email login status
 
-all: clean $(SUBDIRS)
+
+all: clean $(SUBDIRS) status
+
+
+all-without-softconsole-final: softconsole-base libero weak build-containers
+
+
+softconsole-base: softconsole-base softconsole-base-slim
+
+
+softconsole-final: softconsole-5-3 softconsole-5-3-slim
+
+
+libero: libero11-8
+
+
+weak: weak-ubuntu16
+
+
+build-containers: debian9.4-cmake-mingw
+
+
+status:
 	@echo ""
 	@echo "*************************************************************************"
 	@echo "Listing current present images by date of creation"
@@ -16,7 +38,8 @@ all: clean $(SUBDIRS)
 	@echo "Listing current present images by alphabet"
 	@echo "*************************************************************************"
 	@docker images | sort
-	
+
+
 clean:
 	@echo "Clean up existing containers and images"
 	docker ps -a -q -f status=exited | xargs --no-run-if-empty docker rm -v
