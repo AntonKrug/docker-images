@@ -2,7 +2,7 @@
 # It's very weak container, do not use anywhere
 
 FROM ubuntu:16.04
-MAINTAINER Anton Krug <anton.krgu@microsemi.com>
+MAINTAINER Anton Krug <anton.krug@microsemi.com>
 
 RUN apt-get update && apt-get install -y openssh-server sudo whois p7zip
 RUN useradd -m -p DA7i7c8mpufJs -s /bin/bash user
