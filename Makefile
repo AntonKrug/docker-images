@@ -7,6 +7,7 @@ VARIABLES = '$$SOFTCONSOLE_INTRANET_BASE_URL'
 
 
 all: clean $(SUBDIRS) status
+	@echo "Finished all the directory targets $SUBDIRS"
 
 
 all-without-softconsole-final: softconsole-base libero weak build-containers
