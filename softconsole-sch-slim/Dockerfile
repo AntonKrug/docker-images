@@ -1,6 +1,6 @@
-# SoftConsole 5.3 preinstalled
-
-FROM antonkrug/softconsole-base-slim
+# SoftConsole preinstalled
+ARG SC_BASE_IMAGE
+FROM $SC_BASE_IMAGE
 MAINTAINER Anton Krug <anton.krug@microsemi.com>
 
 ENV SOFTCONSOLE_FULL_CAPTURE scLinux-5.4.0.0-20180713-133936

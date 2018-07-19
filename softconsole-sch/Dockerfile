@@ -1,6 +1,6 @@
-# SoftConsole 5.3 preinstalled
-
-FROM antonkrug/softconsole-base
+# SoftConsole preinstalled
+ARG SC_BASE_IMAGE
+FROM $SC_BASE_IMAGE
 MAINTAINER Anton Krug <anton.krug@microsemi.com>
 
 ENV SOFTCONSOLE_FULL_CAPTURE scLinux-5.4.0.0-20180713-133936
@@ -13,6 +13,12 @@ RUN mkdir -p /opt/microsemi/imported_projects && \
     rm $SOFTCONSOLE_FULL_CAPTURE.7z && \
     ln -s /opt/microsemi/$SOFTCONSOLE_FULL_CAPTURE $SC_INSTALL_DIR && \
     chmod -R a+rw /opt/*
+
+# Uninstall CppChekclipse as at the moment it's not compatible in headless mode
+RUN cd $SC_INSTALL_DIR/eclipse && \
+    ./eclipse -application org.eclipse.equinox.p2.director -profile SDKProfile -noSplash -roaming -uninstallIU com.googlecode.cppcheclipse.feature.feature.group && \
+    chmod -R a+rw /opt/*    
+
 
 ENV SWT_GTK3=0
 ENV LD_LIBRARY_PATH="$SC_INSTALL_DIR/openocd/bin:$LD_LIBRARY_PATH"
