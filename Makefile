@@ -14,6 +14,7 @@ all: list $(SUBDIRS)
 list:
 	@echo "*************************************************************************"
 	@echo "All present subdirectories ${SUBDIRS}"
+	@echo "SoftConsole capture is set SC_CAPTURE=${SC_CAPTURE}"
 	@echo "*************************************************************************"
 
 
@@ -72,14 +73,21 @@ $(SUBDIRS):
 		time cat ./${IMAGE}/Dockerfile | envsubst ${VARIABLES} | docker build -t ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${TS} -;\
 		docker tag -f ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${TS} ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}; \
 		docker tag -f ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${TS} ${DOCKER_USER}/${IMAGE}:latest; \
+		echo "Docker push CAPTURE-GITHASH-TS tag"; \
+		docker push ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${TS}; \
+		echo "Docker push CAPTURE tag"; \
+		docker push ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}; \
 	else \
 		echo "Tagging current hash container as the latest:"; \
 		echo "GITHASH -> latest"; \
 		time cat ./${IMAGE}/Dockerfile | envsubst ${VARIABLES} | docker build -t ${DOCKER_USER}/${IMAGE}:${TAG} -;\
 		docker tag -f ${DOCKER_USER}/${IMAGE}:${TAG} ${DOCKER_USER}/${IMAGE}:latest; \
+		echo "Docker push GITHASH tag"; \
+		docker push ${DOCKER_USER}/${IMAGE}:${TAG}; \
 	fi
 
-	@docker push ${DOCKER_USER}/${IMAGE}
+	@echo "Push latest tag"
+	@docker push ${DOCKER_USER}/${IMAGE}:latest
 
 
 login-email:
