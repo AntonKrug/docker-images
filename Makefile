@@ -67,7 +67,7 @@ $(SUBDIRS):
 	@echo Make sure we are using the newest base image: ${BASE_IMAGE}
 	@docker pull ${BASE_IMAGE}
 
-	@if [ "${IMAGE}" = "softconsole-5-3" ] || [ "${IMAGE}" = "softconsole-5-3-slim" ];  then \
+	@if [ "${IMAGE}" = "softconsole-sch" ] || [ "${IMAGE}" = "softconsole-sch-slim" ];  then \
 		echo "SoftConsole final container tagging is slightly different compared to other containers"; \
 		echo "CAPTURE-GITHASH-TIMESTAMP -> CAPTURE -> latest"; \
 		time cat ./${IMAGE}/Dockerfile | envsubst ${VARIABLES} | docker build -t ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${TS} -;\
