@@ -64,13 +64,17 @@ $(SUBDIRS):
 
 	@echo "Building: ${DOCKER_USER}/${IMAGE}:${TAG}"
 	$(eval BASE_IMAGE=`cat ./${IMAGE}/Dockerfile | grep FROM | cut -d' '  -f2`)
-	@echo Make sure we are using the newest base image: ${BASE_IMAGE}
-	@docker pull ${BASE_IMAGE}
 
 	@if [ "${IMAGE}" = "softconsole-sch" ];  then \
+		echo Make sure we are using the newest base image: ${BASE_IMAGE}; \
+		docker pull antonkrug/softconsole-base;\
+		docker pull antonkrug/softconsole-base-slim;\
 		echo "SoftConsole final container generation is different because 1 Dockerfile will generate 2 variants of a container (full and slim variants).";\
 		echo "Tagging is slightly different compared to other containers as well, 1 images creates 3 tags"; \
 		echo "CAPTURE-GITHASH-TIMESTAMP -> CAPTURE -> latest"; \
+		echo "Example of envsubst resolved Dockerfile:"; \
+		cat ./${IMAGE}/Dockerfile | SC_BASE_IMAGE=antonkrug/softconsole-base envsubst ${VARIABLES};\
+		exit; \
 		time cat ./${IMAGE}/Dockerfile | SC_BASE_IMAGE=antonkrug/softconsole-base envsubst ${VARIABLES} | docker build -t ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${TS} -;\
 		time cat ./${IMAGE}/Dockerfile | SC_BASE_IMAGE=antonkrug/softconsole-base-slim envsubst ${VARIABLES} | docker build -t ${DOCKER_USER}/${IMAGE}-slim:${SC_CAPTURE}-${TAG}-${TS} -;\
 		docker tag -f ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${TS} ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}; \
@@ -87,6 +91,8 @@ $(SUBDIRS):
 		docker push ${DOCKER_USER}/${IMAGE}:latest;\
 		docker push ${DOCKER_USER}/${IMAGE}-slim:latest;\
 	else \
+		echo Make sure we are using the newest base image: ${BASE_IMAGE}; \
+		docker pull ${BASE_IMAGE};\
 		echo "Tagging current hash container as the latest:"; \
 		echo "GITHASH -> latest"; \
 		time cat ./${IMAGE}/Dockerfile | docker build -t ${DOCKER_USER}/${IMAGE}:${TAG} -;\
