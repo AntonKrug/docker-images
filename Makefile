@@ -3,7 +3,7 @@ SUBDIRS   := $(wildcard */.)
 MAKEFLAGS := --jobs=1  # force sequential execution as docker doesn't like concurent
 TS := $(shell /bin/date "+%Y-%m-%d-%H-%M-%S")
 $(eval TAG=$(shell git log -1 --pretty=%h))
-VARIABLES = '$$SOFTCONSOLE_INTRANET_BASE_URL'
+VARIABLES = '$$SOFTCONSOLE_INTRANET_BASE_URL $$SC_BASE_IMAGE'
 
 .PHONY: clean all $(SUBDIRS) login-email login status list
 
@@ -71,8 +71,8 @@ $(SUBDIRS):
 		echo "SoftConsole final container generation is different because 1 Dockerfile will generate 2 variants of a container (full and slim variants).";\
 		echo "Tagging is slightly different compared to other containers as well, 1 images creates 3 tags"; \
 		echo "CAPTURE-GITHASH-TIMESTAMP -> CAPTURE -> latest"; \
-		time cat ./${IMAGE}/Dockerfile | envsubst ${VARIABLES} | SC_BASE_IMAGE=antonkrug/softconsole-base docker build -t ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${TS} -;\
-		time cat ./${IMAGE}/Dockerfile | envsubst ${VARIABLES} | SC_BASE_IMAGE=antonkrug/softconsole-base-slim docker build -t ${DOCKER_USER}/${IMAGE}-slim:${SC_CAPTURE}-${TAG}-${TS} -;\
+		time cat ./${IMAGE}/Dockerfile | SC_BASE_IMAGE=antonkrug/softconsole-base envsubst ${VARIABLES} | docker build -t ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${TS} -;\
+		time cat ./${IMAGE}/Dockerfile | SC_BASE_IMAGE=antonkrug/softconsole-base-slim envsubst ${VARIABLES} | docker build -t ${DOCKER_USER}/${IMAGE}-slim:${SC_CAPTURE}-${TAG}-${TS} -;\
 		docker tag -f ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${TS} ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}; \
 		docker tag -f ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${TS} ${DOCKER_USER}/${IMAGE}:latest; \
 		docker tag -f ${DOCKER_USER}/${IMAGE}-slim:${SC_CAPTURE}-${TAG}-${TS} ${DOCKER_USER}/${IMAGE}-slim:${SC_CAPTURE}; \
@@ -89,7 +89,7 @@ $(SUBDIRS):
 	else \
 		echo "Tagging current hash container as the latest:"; \
 		echo "GITHASH -> latest"; \
-		time cat ./${IMAGE}/Dockerfile | envsubst ${VARIABLES} | docker build -t ${DOCKER_USER}/${IMAGE}:${TAG} -;\
+		time cat ./${IMAGE}/Dockerfile | docker build -t ${DOCKER_USER}/${IMAGE}:${TAG} -;\
 		docker tag -f ${DOCKER_USER}/${IMAGE}:${TAG} ${DOCKER_USER}/${IMAGE}:latest; \
 		echo "Docker push GITHASH tag"; \
 		docker push ${DOCKER_USER}/${IMAGE}:${TAG}; \
