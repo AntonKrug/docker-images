@@ -71,8 +71,8 @@ $(SUBDIRS):
 		echo "SoftConsole final container generation is different because 1 Dockerfile will generate 2 variants of a container (full and slim variants).";\
 		echo "Tagging is slightly different compared to other containers as well, 1 images creates 3 tags"; \
 		echo "CAPTURE-GITHASH-TIMESTAMP -> CAPTURE -> latest"; \
-		time cat ./${IMAGE}/Dockerfile | envsubst ${VARIABLES} | docker build --build-arg SC_BASE_IMAGE=antonkrug/softconsole-base -t ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${TS} -;\
-		time cat ./${IMAGE}/Dockerfile | envsubst ${VARIABLES} | docker build --build-arg SC_BASE_IMAGE=antonkrug/softconsole-base-slim -t ${DOCKER_USER}/${IMAGE}-slim:${SC_CAPTURE}-${TAG}-${TS} -;\
+		time cat ./${IMAGE}/Dockerfile | envsubst ${VARIABLES} | SC_BASE_IMAGE=antonkrug/softconsole-base docker build -t ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${TS} -;\
+		time cat ./${IMAGE}/Dockerfile | envsubst ${VARIABLES} | SC_BASE_IMAGE=antonkrug/softconsole-base-slim docker build -t ${DOCKER_USER}/${IMAGE}-slim:${SC_CAPTURE}-${TAG}-${TS} -;\
 		docker tag -f ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${TS} ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}; \
 		docker tag -f ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${TS} ${DOCKER_USER}/${IMAGE}:latest; \
 		docker tag -f ${DOCKER_USER}/${IMAGE}-slim:${SC_CAPTURE}-${TAG}-${TS} ${DOCKER_USER}/${IMAGE}-slim:${SC_CAPTURE}; \

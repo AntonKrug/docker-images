@@ -1,5 +1,5 @@
 # SoftConsole preinstalled
-ARG SC_BASE_IMAGE
+
 FROM $SC_BASE_IMAGE
 MAINTAINER Anton Krug <anton.krug@microsemi.com>
 
