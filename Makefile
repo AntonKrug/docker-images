@@ -24,7 +24,7 @@ all-without-softconsole-final: softconsole-base-images libero weak build-contain
 softconsole-base-images: softconsole-base/. softconsole-base-slim/.
 
 
-softconsole-final: softconsole-5-3/. softconsole-5-3-slim/.
+softconsole-final: softconsole-sch/. softconsole-sch-slim/.
 
 
 libero: libero11-8/.
