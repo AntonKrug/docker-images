@@ -4,7 +4,11 @@ FROM centos:6.9
 MAINTAINER Anton Krug <anton.krug@microsemi.com>
 
 # Basic dependancies
-RUN yum install -y firefox xorg-x11-apps-7.7-6.el6.x86_64 mc git wget vim curl && \
+RUN yum install -y info-4.13a-8.el6.x86_64 mc git wget vim curl && \
+    yum clean packages
+
+# X11 dependancies
+RUN yum install -y mesa-libGL-11.0.7-4.el6.x86_64 firefox xorg-x11-apps-7.7-6.el6.x86_64  && \
     yum clean packages
 
 # Libero dependancies
