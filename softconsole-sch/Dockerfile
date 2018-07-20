@@ -1,16 +1,16 @@
 # SoftConsole preinstalled
 FROM $SC_BASE_IMAGE
 MAINTAINER Anton Krug <anton.krug@microsemi.com>
+ADD scLinux*.zip /opt/microsemi/
 
-ENV SOFTCONSOLE_FULL_CAPTURE scLinux-5.4.0.0-20180713-133936
 ENV SC_INSTALL_DIR=/opt/microsemi/softconsole
 
+# Unpack softconsole
 RUN mkdir -p /opt/microsemi/imported_projects && \
     cd /opt/microsemi && \
-    wget -q ftp://$SOFTCONSOLE_INTRANET_BASE_URL/$SOFTCONSOLE_FULL_CAPTURE.7z && \
-    7za x $SOFTCONSOLE_FULL_CAPTURE.7z && \
-    rm $SOFTCONSOLE_FULL_CAPTURE.7z && \
-    ln -s /opt/microsemi/$SOFTCONSOLE_FULL_CAPTURE $SC_INSTALL_DIR && \
+    unzip scLinux*.zip && \
+    rm scLinux*.zip && \
+    ln -s /opt/microsemi/scLinux* $SC_INSTALL_DIR && \
     chmod -R a+rw /opt/*
 
 # Uninstall CppChekclipse as at the moment it's not compatible in headless mode
