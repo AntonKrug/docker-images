@@ -4,7 +4,7 @@ FROM centos:6.9
 MAINTAINER Anton Krug <anton.krug@microsemi.com>
 
 # Basic dependancies
-RUN yum install -y info mc git wget vim curl htop joe zip p7zip && \
+RUN yum install -y info mc git wget vim curl htop joe zip p7zip yum-utils && \
     yum clean packages
 
 # X11 dependancies
