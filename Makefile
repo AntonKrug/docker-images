@@ -72,22 +72,28 @@ $(SUBDIRS):
 		echo "SoftConsole final container generation is different because 1 Dockerfile will generate 2 variants of a container (full and slim variants)."; \
 		echo "Tagging is slightly different compared to other containers as well, 1 images creates 3 tags"; \
 		echo "CAPTURE-GITHASH-TIMESTAMP -> CAPTURE -> latest"; \
+		\
 		cat ./${IMAGE}/Dockerfile | SC_BASE_IMAGE=antonkrug/softconsole-base envsubst ${VARIABLES} > ./${IMAGE}/Dockerfile.full; \
 		cat ./${IMAGE}/Dockerfile | SC_BASE_IMAGE=antonkrug/softconsole-base-slim envsubst ${VARIABLES} > ./${IMAGE}/Dockerfile.slim; \
 		echo "Input Dockerfiles:"; \
 		cat ./${IMAGE}/Dockerfile.*; \
+		\
 		time docker build -t ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${TS} -f ./${IMAGE}/Dockerfile.full; \
 		time docker build -t ${DOCKER_USER}/${IMAGE}-slim:${SC_CAPTURE}-${TAG}-${TS} -f ./${IMAGE}/Dockerfile.slim; \
+		\
 		docker tag -f ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${TS} ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}; \
 		docker tag -f ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${TS} ${DOCKER_USER}/${IMAGE}:latest; \
 		docker tag -f ${DOCKER_USER}/${IMAGE}-slim:${SC_CAPTURE}-${TAG}-${TS} ${DOCKER_USER}/${IMAGE}-slim:${SC_CAPTURE}; \
 		docker tag -f ${DOCKER_USER}/${IMAGE}-slim:${SC_CAPTURE}-${TAG}-${TS} ${DOCKER_USER}/${IMAGE}-slim:latest; \
+		\
 		echo "Docker push CAPTURE-GITHASH-TS tag"; \
 		docker push ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${TS}; \
 		docker push ${DOCKER_USER}/${IMAGE}-slim:${SC_CAPTURE}-${TAG}-${TS}; \
+		\
 		echo "Docker push CAPTURE tag"; \
 		docker push ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}; \
 		docker push ${DOCKER_USER}/${IMAGE}-slim:${SC_CAPTURE}; \
+		\
 		echo "Docker push latest tag"; \
 		docker push ${DOCKER_USER}/${IMAGE}:latest; \
 		docker push ${DOCKER_USER}/${IMAGE}-slim:latest; \
@@ -97,9 +103,11 @@ $(SUBDIRS):
 		echo "Tagging current hash container as the latest:"; \
 		echo "GITHASH -> latest"; \
 		time cat ./${IMAGE}/Dockerfile | docker build -t ${DOCKER_USER}/${IMAGE}:${TAG} -; \
+		\
 		docker tag -f ${DOCKER_USER}/${IMAGE}:${TAG} ${DOCKER_USER}/${IMAGE}:latest; \
 		echo "Docker push GITHASH tag"; \
 		docker push ${DOCKER_USER}/${IMAGE}:${TAG}; \
+		\
 		echo "Docker push latest tag"; \
 		docker push ${DOCKER_USER}/${IMAGE}:latest; \
 	fi
