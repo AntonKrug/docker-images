@@ -8,7 +8,7 @@ RUN yum install -y info mc git wget vim curl htop joe zip p7zip && \
     yum clean packages
 
 # X11 dependancies
-RUN yum install -y libcroco-0.6.2.-5.el6.x86_64 mesa-libGL-11.0.7-4.el6.x86_64 xorg-x11-apps-7.7-6.el6.x86_64 firefox && \
+RUN yum install -y libcroco-0.6.2-5.el6.x86_64 mesa-libGL-11.0.7-4.el6.x86_64 xorg-x11-apps-7.7-6.el6.x86_64 firefox && \
     yum clean packages
 
 # Libero dependancies
