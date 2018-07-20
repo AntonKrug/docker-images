@@ -78,8 +78,8 @@ $(SUBDIRS):
 		echo "Input Dockerfiles:"; \
 		cat ./${IMAGE}/Dockerfile.*; \
 		\
-		time docker build -t ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${TS} -f Dockerfile.full ./${IMAGE}; \
-		time docker build -t ${DOCKER_USER}/${IMAGE}-slim:${SC_CAPTURE}-${TAG}-${TS} -f Dockerfile.slim ./${IMAGE}; \
+		time docker build -t ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${TS} -f ./${IMAGE}/Dockerfile.full ./${IMAGE}; \
+		time docker build -t ${DOCKER_USER}/${IMAGE}-slim:${SC_CAPTURE}-${TAG}-${TS} -f ./${IMAGE}/Dockerfile.slim ./${IMAGE}; \
 		\
 		docker tag -f ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${TS} ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}; \
 		docker tag -f ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${TS} ${DOCKER_USER}/${IMAGE}:latest; \
