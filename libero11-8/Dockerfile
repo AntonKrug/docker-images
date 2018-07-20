@@ -8,8 +8,21 @@ RUN yum install -y info mc git wget vim curl htop joe zip p7zip && \
     yum clean packages
 
 # X11 dependancies
-RUN yum install -y libcroco-0.6.2-5.el6.x86_64 mesa-libGL-11.0.7-4.el6.x86_64 xorg-x11-apps-7.7-6.el6.x86_64 firefox && \
+RUN yum install -y libcroco-0.6.2-5.el6.x86_64 mesa-libGL-11.0.7-4.el6.x86_64 xorg-x11-apps-7.7-6.el6.x86_64 && \
     yum clean packages
+
+# update the packages
+RUN yum -y check-update && \
+    yum update && \
+    yum clean packages
+
+# larger X11 applications
+RUN yum install -y firefox && \
+    rpm -v --import https://download.sublimetext.com/sublimehq-rpm-pub.gpg && \
+    yum-config-manager --add-repo https://download.sublimetext.com/rpm/stable/x86_64/sublime-text.repo && \
+    yum install sublime-text && \
+    yum clean packages
+    
 
 # Libero dependancies
 RUN yum -y check-update && \
