@@ -3,6 +3,7 @@ SUBDIRS   := $(wildcard */.)
 MAKEFLAGS := --jobs=1  # force sequential execution as docker doesn't like concurent
 TS := $(shell /bin/date "+%Y-%m-%d-%H-%M-%S")
 $(eval TAG=$(shell git log -1 --pretty=%h))
+$(eval SC_COMMIT_HASH=$(shell git rev-parse --short  ${SC_COMMIT_HASH}))
 VARIABLES = '$$SOFTCONSOLE_INTRANET_BASE_URL $$SC_BASE_IMAGE'
 
 .PHONY: clean all $(SUBDIRS) login-email login status list
@@ -15,6 +16,7 @@ list:
 	@echo "*************************************************************************"
 	@echo "All present subdirectories ${SUBDIRS}"
 	@echo "SoftConsole capture is set SC_CAPTURE=${SC_CAPTURE}"
+	@echo "Parent SoftConsole capture hash SC_COMMIT_HASH=${SC_COMMIT_HASH}"
 	@echo "*************************************************************************"
 
 
@@ -93,7 +95,7 @@ softconsole-sch/.:
 	@echo "${IMAGE}"
 	@echo "*************************************************************************"
 
-	@echo "Building: ${DOCKER_USER}/${IMAGE}:${TAG}"
+	@echo "Building: ${DOCKER_USER}/${IMAGE}:${TAG}-${SC_COMMIT_HASH}"
 	$(eval BASE_IMAGE=`cat ./${IMAGE}/Dockerfile | grep FROM | cut -d' '  -f2`)
 
 	@echo
@@ -113,21 +115,21 @@ softconsole-sch/.:
 	@cat ./${IMAGE}/Dockerfile.*
 	
 	@echo
-	time docker build -t ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${TS} -f ./${IMAGE}/Dockerfile.full ./${IMAGE}
+	time docker build -t ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${SC_COMMIT_HASH}-${TS} -f ./${IMAGE}/Dockerfile.full ./${IMAGE}
 
 	@echo
-	time docker build -t ${DOCKER_USER}/${IMAGE}-slim:${SC_CAPTURE}-${TAG}-${TS} -f ./${IMAGE}/Dockerfile.slim ./${IMAGE}
+	time docker build -t ${DOCKER_USER}/${IMAGE}-slim:${SC_CAPTURE}-${TAG}-${SC_COMMIT_HASH}-${TS} -f ./${IMAGE}/Dockerfile.slim ./${IMAGE}
 	
 	@echo
-	docker tag -f ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${TS} ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}
-	docker tag -f ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${TS} ${DOCKER_USER}/${IMAGE}:latest
-	docker tag -f ${DOCKER_USER}/${IMAGE}-slim:${SC_CAPTURE}-${TAG}-${TS} ${DOCKER_USER}/${IMAGE}-slim:${SC_CAPTURE}
-	docker tag -f ${DOCKER_USER}/${IMAGE}-slim:${SC_CAPTURE}-${TAG}-${TS} ${DOCKER_USER}/${IMAGE}-slim:latest
+	docker tag -f ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${SC_COMMIT_HASH}-${TS} ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}
+	docker tag -f ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${SC_COMMIT_HASH}-${TS} ${DOCKER_USER}/${IMAGE}:latest
+	docker tag -f ${DOCKER_USER}/${IMAGE}-slim:${SC_CAPTURE}-${TAG}-${SC_COMMIT_HASH}-${TS} ${DOCKER_USER}/${IMAGE}-slim:${SC_CAPTURE}
+	docker tag -f ${DOCKER_USER}/${IMAGE}-slim:${SC_CAPTURE}-${TAG}-${SC_COMMIT_HASH}-${TS} ${DOCKER_USER}/${IMAGE}-slim:latest
 	
 	@echo
 	@echo "Docker push CAPTURE-GITHASH-TS tag"
-	docker push ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${TS}
-	docker push ${DOCKER_USER}/${IMAGE}-slim:${SC_CAPTURE}-${TAG}-${TS}
+	docker push ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${SC_COMMIT_HASH}-${TS}
+	docker push ${DOCKER_USER}/${IMAGE}-slim:${SC_CAPTURE}-${TAG}-${SC_COMMIT_HASH}-${TS}
 	
 	@echo
 	@echo "Docker push CAPTURE tag"
