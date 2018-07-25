@@ -3,7 +3,6 @@ SUBDIRS   := $(wildcard */.)
 MAKEFLAGS := --jobs=1  # force sequential execution as docker doesn't like concurent
 TS := $(shell /bin/date "+%Y-%m-%d-%H-%M-%S")
 $(eval TAG=$(shell git log -1 --pretty=%h))
-$(eval SC_COMMIT_HASH=$(shell git rev-parse --short  ${SC_COMMIT_HASH}))
 VARIABLES = '$$SOFTCONSOLE_INTRANET_BASE_URL $$SC_BASE_IMAGE'
 
 .PHONY: clean all $(SUBDIRS) login-email login status list
