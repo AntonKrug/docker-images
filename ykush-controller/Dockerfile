@@ -18,8 +18,8 @@ RUN wget https://www.yepkit.com/uploads/documents/68548_ykushcmd_master_20171130
 
 # Compile the project
 RUN cd ykush-master && \
-    ./build.sh && \
-    ./install.sh && \
+    ./build.sh ; \
+    ./install.sh ; \
     mkdir -p /doc && \
     cp *.txt /doc/
 
