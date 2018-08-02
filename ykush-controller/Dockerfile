@@ -16,13 +16,12 @@ RUN wget https://www.yepkit.com/uploads/documents/68548_ykushcmd_master_20171130
     rm *.zip
 
 
-# Compile the project, exit 0 in case there will be problems (which they might becuase of the udev stuff, but the binary will work)
+# Compile the project
 RUN cd ykush-master && \
     ./build.sh ; \
     ./install.sh ; \
     mkdir -p /doc && \
-    cp *.txt /doc/ && \
-    exit 0
+    cp ./doc/*.txt /doc/ 
 
 
 VOLUME /docker_shares/common
