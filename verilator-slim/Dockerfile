@@ -17,6 +17,7 @@ RUN apt-get update && \
     THREADS=`grep -c ^processor /proc/cpuinfo`  && \
     make -j $THREADS  && \
     make install && \
+    cd .. && \
     rm -rv verilator-3.924/    
     verilator --version && \
     export SUDO_FORCE_REMOVE=yes && \
