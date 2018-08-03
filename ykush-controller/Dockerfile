@@ -16,7 +16,7 @@ RUN wget https://www.yepkit.com/uploads/documents/68548_ykushcmd_master_20171130
     rm *.zip
 
 
-# Compile the project
+# Compile and install the project
 RUN cd ykush-master && \
     ./build.sh ; \
     ./install.sh ; \
