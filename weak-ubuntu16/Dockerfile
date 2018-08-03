@@ -4,9 +4,16 @@
 FROM ubuntu:16.04
 MAINTAINER Anton Krug <anton.krug@microsemi.com>
 
-RUN apt-get update && apt-get install -y openssh-server sudo whois p7zip
-RUN useradd -m -p DA7i7c8mpufJs -s /bin/bash user
-RUN echo "user ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/user
+
+RUN apt-get update && \
+    apt-get install -y openssh-server sudo whois p7zip && \
+    apt-get clean && \    
+    rm -rf /var/lib/apt/lists/*
+
+
+RUN useradd -m -p DA7i7c8mpufJs -s /bin/bash user && \
+    echo "user ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/user
+
 
 VOLUME /docker_shares/common
 
