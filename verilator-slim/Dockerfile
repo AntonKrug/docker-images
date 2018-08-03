@@ -11,7 +11,7 @@ RUN apt-get update && \
     node -v && \
     wget --no-check-certificate https://www.veripool.org/ftp/verilator-3.924.tgz && \
     tar xfv verilator-3.924.tgz  && \
-    rm xfv verilator-3.924.tgz  && \
+    rm -v verilator-3.924.tgz && \
     cd verilator-3.924  && \
     ./configure  && \
     THREADS=`grep -c ^processor /proc/cpuinfo`  && \
