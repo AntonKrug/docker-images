@@ -18,10 +18,10 @@ RUN apt-get update && \
     make -j $THREADS  && \
     make install && \
     cd .. && \
-    rm -rv verilator-3.924/    
+    rm -rv verilator-3.924/ && \
     verilator --version && \
     export SUDO_FORCE_REMOVE=yes && \
-    apt-get remove --purge -y git wget xz-utils curl sudo git
+    apt-get remove --purge -y git wget xz-utils curl sudo git && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
