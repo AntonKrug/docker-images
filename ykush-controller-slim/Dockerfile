@@ -1,6 +1,6 @@
 # Slim version to access ykush USB controller
 
-FROM ubuntu:16.04
+FROM debian:9.4-slim
 MAINTAINER Anton Krug <anton.krug@microsemi.com>
 
 
@@ -20,6 +20,7 @@ RUN apt-get update && \
     export SUDO_FORCE_REMOVE=yes && \
     apt-get remove --purge -y build-essential git wget unzip sudo libusb-1.0-0-dev libudev-dev && \
     apt-get clean && \
+    apt-get autoremove -y && \
     ykushcmd -h
 
 
