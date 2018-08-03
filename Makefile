@@ -63,6 +63,7 @@ clean:
 
 $(SUBDIRS):
 	# Will generate containers for all the generic containers, it's using hash of the git commit as tag version
+	# It will alias this tag with latest tag so the latest always points to the bleeding edge
 	$(eval IMAGE=$(@:/.=))
 	@echo
 	@echo "*************************************************************************"
@@ -109,6 +110,12 @@ softconsole-sch/.:
 	# So they will be still sorted by major released while allowing to see what baker commit 
 	# and what docker builder commit are mapping to what tag. And even if nothing changed
 	# and it was re-run manually, then the timestamp will distinguish both runs
+	# 
+	# On top of linking the long-winded tag to latest tag, it is linking it to the shorter
+	# SC_CAPTURE
+	# Which means after new major version is introduced, it will make the previous version
+	# a static point, which should be stable and human friendly tag to use.
+
 	$(eval IMAGE=$(@:/.=))
 	@echo
 	@echo "*************************************************************************"
