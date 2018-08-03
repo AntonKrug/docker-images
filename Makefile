@@ -28,7 +28,7 @@ libero: libero11-8/.
 weak: weak-ubuntu16/.
 
 
-build-containers: debian9.4-cmake-mingw/. ykush-controller/. ykush-controller-slim/. verilator/.
+build-containers: debian9.4-cmake-mingw/. ykush-controller/. ykush-controller-slim/. verilator/. verilator-slim/.
 
 
 list:
