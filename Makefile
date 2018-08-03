@@ -1,4 +1,5 @@
 SC_CAPTURE ?= 5.4
+SHELL = bash
 SUBDIRS   := $(wildcard */.)
 MAKEFLAGS := --jobs=1  # force sequential execution as docker doesn't like concurent
 TS := $(shell /bin/date "+%Y-%m-%d-%H-%M-%S")
