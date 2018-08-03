@@ -5,7 +5,8 @@ MAINTAINER Anton Krug <anton.krug@microsemi.com>
 
 
 # Remove build dependancies
-RUN apt-get remove --purge -y build-essential git wget unzip sudo
+RUN export SUDO_FORCE_REMOVE=yes && \
+    apt-get remove --purge -y build-essential git wget unzip sudo
 
 
 # Remove source 
