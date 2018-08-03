@@ -7,11 +7,12 @@ MAINTAINER Anton Krug <anton.krug@microsemi.com>
 # Get all dependancies
 RUN apt-get update && \
     apt-get install -y build-essential git wget unzip sudo libusb-1.0-0-dev libusb-1.0-0 libudev-dev libudev1 && \
-    apt-get clean 
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 
 # Download and extract sources
-RUN wget https://www.yepkit.com/uploads/documents/68548_ykushcmd_master_20171130.zip && \
+RUN wget --no-check-certificate https://www.yepkit.com/uploads/documents/68548_ykushcmd_master_20171130.zip && \
     unzip *.zip && \
     rm *.zip
 

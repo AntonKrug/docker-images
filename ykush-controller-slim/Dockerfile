@@ -6,9 +6,9 @@ MAINTAINER Anton Krug <anton.krug@microsemi.com>
 
 # Get all dependancies, compile, install and wipe after finished
 RUN apt-get update && \
-    apt-get install -y build-essential git wget unzip sudo libusb-1.0-0-dev libusb-1.0-0 libudev-dev libudev1 && \
+    apt-get install -y --no-install-recommends build-essential git wget unzip sudo libusb-1.0-0-dev libusb-1.0-0 libudev-dev libudev1 && \
     apt-get clean && \
-    wget https://www.yepkit.com/uploads/documents/68548_ykushcmd_master_20171130.zip && \
+    wget --no-check-certificate https://www.yepkit.com/uploads/documents/68548_ykushcmd_master_20171130.zip && \
     unzip *.zip && \
     rm *.zip &&\
     cd ykush-master && \
@@ -21,6 +21,7 @@ RUN apt-get update && \
     apt-get remove --purge -y build-essential git wget unzip sudo libusb-1.0-0-dev libudev-dev && \
     apt-get clean && \
     apt-get autoremove -y && \
+    rm -rf /var/lib/apt/lists/* && \
     ykushcmd -h
 
 
