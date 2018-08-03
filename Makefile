@@ -8,18 +8,11 @@ VARIABLES = '$$SOFTCONSOLE_INTRANET_BASE_URL $$SC_BASE_IMAGE'
 
 .PHONY: clean all $(SUBDIRS) login-email login status list
 
-
+# ----- Default target -----
 all: list $(SUBDIRS)
 
 
-list:
-	@echo "*************************************************************************"
-	@echo "All present subdirectories ${SUBDIRS}"
-	@echo "SoftConsole capture is set SC_CAPTURE=${SC_CAPTURE}"
-	@echo "Parent SoftConsole capture hash SC_COMMIT_HASH=${SC_COMMIT_HASH}"
-	@echo "*************************************************************************"
-
-
+# ----- Aliases/groups of targets ------
 all-without-softconsole-final: softconsole-base-images libero weak build-containers
 
 
@@ -38,7 +31,17 @@ weak: weak-ubuntu16/.
 build-containers: debian9.4-cmake-mingw/. ykush-controller/. ykush-controller-slim/.
 
 
+list:
+	# Helper to display conditions at which this make file is run
+	@echo "*************************************************************************"
+	@echo "All present subdirectories ${SUBDIRS}"
+	@echo "SoftConsole capture is set SC_CAPTURE=${SC_CAPTURE}"
+	@echo "Parent SoftConsole capture hash SC_COMMIT_HASH=${SC_COMMIT_HASH}"
+	@echo "*************************************************************************"
+
+
 status:
+	# Will display existing images so it should show the freshly generated ones
 	@echo ""
 	@echo "*************************************************************************"
 	@echo "Listing current present images by date of creation"
@@ -52,12 +55,14 @@ status:
 
 
 clean:
+	# Try to remove previous containers so they will not keep piling up
 	@echo "Clean up existing containers and images"
 	docker ps -a -q -f status=exited | xargs --no-run-if-empty docker rm -v
 	docker images -q -f dangling=true | xargs --no-run-if-empty docker rmi
 
 
 $(SUBDIRS):
+	# Will generate containers for all the generic containers, it's using hash of the git commit as tag version
 	$(eval IMAGE=$(@:/.=))
 	@echo
 	@echo "*************************************************************************"
@@ -89,6 +94,21 @@ $(SUBDIRS):
 
 
 softconsole-sch/.:
+	# In contrast to regular target this will generate 2 containers instead of 1.
+	#
+	# Both are for the SCH, one regular and one slim. It uses single file as a template
+	# and 2 different Dockerfiles are produced. More modern ways of using ARG are avoided
+	# because this needs to work on larger range of docker versions.
+    #
+	# For tagging it's using hash of the git commit and it iherits the hash from parent 
+	# (softconsole-baker branch:docker), then it combines both hashes
+	# with prefixed SC_CAPTURE variable and postfixed date.
+	#
+	# SC_CAPTURE - DOCKER_BUILDER_COMMIT_HASH - SOFTCONSOLE_BAKER_COMMIT_HASH - TIMESTAMP
+	# 
+	# So they will be still sorted by major released while allowing to see what baker commit 
+	# and what docker builder commit are mapping to what tag. And even if nothing changed
+	# and it was re-run manually, then the timestamp will distinguish both runs
 	$(eval IMAGE=$(@:/.=))
 	@echo
 	@echo "*************************************************************************"
@@ -143,10 +163,12 @@ softconsole-sch/.:
 
 
 login-email:
+	# Login into docker the old way
 	@echo "Login into the docker account with email"
 	@docker login -u ${DOCKER_USER} -e ${DOCKER_EMAIL} -p ${DOCKER_PASS}
 
 
 login:
+	# Login into docker the current way
 	@echo "Login into the docker account without email"
 	@docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}
