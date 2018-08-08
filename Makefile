@@ -142,31 +142,31 @@ softconsole-sch/.:
 	@cat ./${IMAGE}/Dockerfile.*
 	
 	@echo
-	time docker build -t ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${SC_COMMIT_HASH}-${TS} -f ./${IMAGE}/Dockerfile.full ./${IMAGE}
+	time docker build -t ${DOCKER_USER}/${IMAGE}-slim:${SC_CAPTURE}-${TAG}-${SC_COMMIT_HASH}-${TS} -f ./${IMAGE}/Dockerfile.slim ./${IMAGE}
 
 	@echo
-	time docker build -t ${DOCKER_USER}/${IMAGE}-slim:${SC_CAPTURE}-${TAG}-${SC_COMMIT_HASH}-${TS} -f ./${IMAGE}/Dockerfile.slim ./${IMAGE}
+	time docker build -t ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${SC_COMMIT_HASH}-${TS} -f ./${IMAGE}/Dockerfile.full ./${IMAGE}
 	
 	@echo
-	docker tag -f ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${SC_COMMIT_HASH}-${TS} ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}
-	docker tag -f ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${SC_COMMIT_HASH}-${TS} ${DOCKER_USER}/${IMAGE}:latest
 	docker tag -f ${DOCKER_USER}/${IMAGE}-slim:${SC_CAPTURE}-${TAG}-${SC_COMMIT_HASH}-${TS} ${DOCKER_USER}/${IMAGE}-slim:${SC_CAPTURE}
 	docker tag -f ${DOCKER_USER}/${IMAGE}-slim:${SC_CAPTURE}-${TAG}-${SC_COMMIT_HASH}-${TS} ${DOCKER_USER}/${IMAGE}-slim:latest
+	docker tag -f ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${SC_COMMIT_HASH}-${TS} ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}
+	docker tag -f ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${SC_COMMIT_HASH}-${TS} ${DOCKER_USER}/${IMAGE}:latest
 	
 	@echo
 	@echo "Docker push CAPTURE-GITHASH-TS tag"
-	docker push ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${SC_COMMIT_HASH}-${TS}
 	docker push ${DOCKER_USER}/${IMAGE}-slim:${SC_CAPTURE}-${TAG}-${SC_COMMIT_HASH}-${TS}
+	docker push ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${SC_COMMIT_HASH}-${TS}
 	
 	@echo
 	@echo "Docker push CAPTURE tag"
-	docker push ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}
 	docker push ${DOCKER_USER}/${IMAGE}-slim:${SC_CAPTURE}
+	docker push ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}
 	
 	@echo
 	@echo "Docker push latest tag"
-	docker push ${DOCKER_USER}/${IMAGE}:latest
 	docker push ${DOCKER_USER}/${IMAGE}-slim:latest
+	docker push ${DOCKER_USER}/${IMAGE}:latest
 
 
 login-email:
