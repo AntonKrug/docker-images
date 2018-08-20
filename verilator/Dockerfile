@@ -5,7 +5,7 @@ MAINTAINER Anton Krug <anton.krug@microsemi.com>
 
 # Get all dependancies 
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends wget xz-utils curl sudo lcov gnupg2 git build-essential autoconf autoconf flex bison ca-certificates && \
+    apt-get install -y --no-install-recommends wget xz-utils curl sudo gnupg2 git build-essential autoconf autoconf flex bison ca-certificates && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* 
 

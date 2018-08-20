@@ -5,20 +5,19 @@ MAINTAINER Anton Krug <anton.krug@microsemi.com>
 
 # Get all dependancies, install nodejs. Get, build and install verilator and clean behind itself in 1 step/layer
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends wget xz-utils curl sudo gnupg2 git build-essential autoconf autoconf flex bison ca-certificates && \
+    apt-get install -y --no-install-recommends wget xz-utils curl sudo gnupg2 git autoconf build-essential autoconf autoconf flex bison ca-certificates && \
     sudo curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
     apt-get install -y nodejs && \
     node -v && \
-    wget --no-check-certificate https://www.veripool.org/ftp/verilator-3.924.tgz && \
-    tar xfv verilator-3.924.tgz  && \
-    rm -v verilator-3.924.tgz && \
-    cd verilator-3.924  && \
+    git clone git@github.com:truhlikfredy/verilator-fork.git && \
+    cd verilator-fork  && \
+    autoconf && \
     ./configure  && \
     THREADS=`grep -c ^processor /proc/cpuinfo`  && \
     make -j $THREADS  && \
     make install && \
     cd .. && \
-    rm -rv verilator-3.924/ && \
+    rm -rv verilator-fork/ && \
     verilator --version && \
     export SUDO_FORCE_REMOVE=yes && \
     apt-get remove --purge -y git wget xz-utils curl sudo git && \
