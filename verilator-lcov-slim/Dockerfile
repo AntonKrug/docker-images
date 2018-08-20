@@ -1,4 +1,4 @@
-#Verilator and nodeJS v8 container
+#Verilator with lcov support and nodeJS v8 container
 
 FROM debian:8.11-slim
 MAINTAINER Anton Krug <anton.krug@microsemi.com>
