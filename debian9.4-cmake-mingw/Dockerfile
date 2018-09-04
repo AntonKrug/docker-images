@@ -1,6 +1,6 @@
 # To build mingw projects which use fairly new cmake
 
-FROM debian:9.4-slim
+FROM debian:9-slim
 MAINTAINER Anton Krug <anton.krug@microsemi.com>
 
 RUN dpkg --add-architecture i386 && apt-get update && apt-get install -y build-essential gcc-multilib g++-multilib libc6-dev-i386 gdb-multiarch gcc-mingw-w64-i686 wget && \

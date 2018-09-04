@@ -1,6 +1,6 @@
 #Verilator and nodeJS v8 container
 
-FROM debian:8.11-slim
+FROM debian:8-slim
 MAINTAINER Anton Krug <anton.krug@microsemi.com>
 
 # Get all dependancies 
