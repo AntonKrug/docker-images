@@ -28,7 +28,9 @@ libero: libero11-8/.
 weak: weak-ubuntu16/.
 
 
-build-containers: renode-builder/. verilator-lcov-slim/. verilator-slim/. verilator/. ykush-controller-slim/. ykush-controller/. debian9.4-cmake-mingw/.
+build-containers: renode-builder/. verilator-lcov-slim/. verilator-slim/. verilator/. debian9.4-cmake-mingw/.
+
+# build-containers which I temporary disabled ykush-controller-slim/. ykush-controller/.
 
 
 list:
@@ -94,7 +96,7 @@ $(SUBDIRS):
 	docker push ${DOCKER_USER}/${IMAGE}:latest
 
 
-softconsole-sch/.:
+softconsoleheadless/.:
 	# In contrast to regular target this will generate 2 containers instead of 1.
 	#
 	# Both are for the SCH, one regular and one slim. It uses single file as a template
