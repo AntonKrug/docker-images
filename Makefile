@@ -1,4 +1,4 @@
-SC_CAPTURE ?= 5.4
+SC_CAPTURE ?= 5.4 # feed from the Jenkins job, update the values in the job itself
 SHELL = bash
 SUBDIRS   := $(wildcard */.)
 MAKEFLAGS := --jobs=1  # force sequential execution as docker doesn't like concurent
@@ -19,7 +19,7 @@ all-without-softconsole-final: softconsole-base-images libero weak build-contain
 softconsole-base-images: softconsole-base/. softconsole-base-slim/.
 
 
-softconsole-final: softconsole-sch/.
+softconsole-final: softconsoleheadless/.
 
 
 libero: libero11-8/.
