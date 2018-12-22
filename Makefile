@@ -147,7 +147,7 @@ softconsoleheadless/.:
 	@echo Making slim container
 	time docker build -t ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${SC_COMMIT_HASH}-${TS}-slim -f ./${IMAGE}/Dockerfile.slim ./${IMAGE}
 
-  @echo
+	@echo
 	@echo Making full container
 	time docker build -t ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${SC_COMMIT_HASH}-${TS} -f ./${IMAGE}/Dockerfile.full ./${IMAGE}
 	
