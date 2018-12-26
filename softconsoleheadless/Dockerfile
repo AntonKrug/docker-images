@@ -18,6 +18,7 @@ ADD scLinux*/openocd scLinux*/gdbinit scLinux*/fpServer $SC_INSTALL_DIR/
 ADD scLinux*/riscv-unknown-elf-gcc $SC_INSTALL_DIR/
 ADD scLinux*/renode $SC_INSTALL_DIR/
 
+RUN ls -la $SC_INSTALL_DIR/
 
 # Uninstall CppChekclipse as at the moment it's not compatible in headless mode
 RUN cd $SC_INSTALL_DIR/eclipse && \
