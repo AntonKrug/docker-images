@@ -19,7 +19,7 @@ RUN dpkg --add-architecture i386 && \
 # Renode dependancies
 RUN apt-get update && \
     apt-get install -y apt-transport-https dirmngr && \
-    sed -i 's%GPG_CMD="gpg %GPG_CMD="gpg --batch %g' /usr/bin/apt-key && \
+    sed -i 's%{GPG_EXE}")\' --%{GPG_EXE}")\' --batch --%g' /usr/bin/apt-key && \
     cat /usr/bin/apt-key && \
     apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF && \
     echo "deb https://download.mono-project.com/repo/debian stable-stretch main" | tee /etc/apt/sources.list.d/mono-official-stable.list && \
