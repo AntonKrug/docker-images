@@ -151,6 +151,10 @@ softconsoleheadless/.:
 	chmod -R a+rw ./${IMAGE}/scLinux*/*
 
 	@echo
+	@echo Fixing time atributes to specific timestap as Docket 1.7 still is using the time to invalidate caches and will not allow reuse caches
+	find ./${IMAGE}/scLinux*/ | xargs touch -t 201812261704.00
+
+	@echo
 	@echo Making slim container
 	time docker build -t ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${SC_COMMIT_HASH}-${TS}-slim -f ./${IMAGE}/Dockerfile.slim ./${IMAGE}
 
