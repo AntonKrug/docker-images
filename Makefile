@@ -144,6 +144,12 @@ softconsoleheadless/.:
 	@cat ./${IMAGE}/Dockerfile.*
 	
 	@echo
+	@echo Extracting SC archive
+	rm -rf ./${IMAGE}/scLinux*  # should remove all directories, but keep the zip
+	unzip ./${IMAGE}/scLinux*.zip -d ./${IMAGE}/
+  chmod -R a+rw ./${IMAGE}/scLinux*/*
+
+	@echo
 	@echo Making slim container
 	time docker build -t ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${SC_COMMIT_HASH}-${TS}-slim -f ./${IMAGE}/Dockerfile.slim ./${IMAGE}
 

@@ -1,17 +1,23 @@
 # SoftConsole preinstalled
 FROM $SC_BASE_IMAGE
-MAINTAINER Anton Krug <anton.krug@microsemi.com>
-ADD scLinux*.zip /opt/microsemi/
-
+MAINTAINER Anton Krug <anton.krug@microchip.com>
 ENV SC_INSTALL_DIR=/opt/microsemi/softconsole
 
-# Unpack softconsole
-RUN mkdir -p /opt/microsemi/imported_projects && \
-    cd /opt/microsemi && \
-    unzip scLinux*.zip && \
-    rm scLinux*.zip && \
-    ln -s /opt/microsemi/scLinux* $SC_INSTALL_DIR && \
-    chmod -R a+rw /opt/*
+# Create dedicate folder for extracting projects temporary and being ready for imports
+RUN mkdir -p /opt/microsemi/imported_projects
+
+# Copy softconsole partially, do not use COPY command as in older docker only ADD supported
+# it could be done quickly with "ADD scLinux*.zip /opt/microsemi/" and "unzip scLinux*.zip && \" but that would create one large layer
+# adding smaller parts will cause multiple separate layers which are smaller and only layers which changed
+# will be re-cached, the common layers can be re-used, saving diskspace, network bandwith, speeding up downloads etc...
+ADD scLinux*/arm-none-eabi-gcc scLinux*/CMSIS $SC_INSTALL_DIR/
+ADD scLinux*/documentation scLinux*/notices $SC_INSTALL_DIR/
+ADD scLinux*/eclipse scLinux*/SoftConsole.xpm scLinux*/softconsole.sh $SC_INSTALL_DIR/
+ADD scLinux*/extras $SC_INSTALL_DIR/
+ADD scLinux*/openocd scLinux*/gdbinit scLinux*/fpServer $SC_INSTALL_DIR/
+ADD scLinux*/riscv-unknown-elf-gcc $SC_INSTALL_DIR/
+ADD scLinux*/renode $SC_INSTALL_DIR/
+
 
 # Uninstall CppChekclipse as at the moment it's not compatible in headless mode
 RUN cd $SC_INSTALL_DIR/eclipse && \
