@@ -10,13 +10,18 @@ RUN mkdir -p /opt/microsemi/imported_projects
 # it could be done quickly with "ADD scLinux*.zip /opt/microsemi/" and "unzip scLinux*.zip && \" but that would create one large layer
 # adding smaller parts will cause multiple separate layers which are smaller and only layers which changed
 # will be re-cached, the common layers can be re-used, saving diskspace, network bandwith, speeding up downloads etc...
-ADD scLinux*/arm-none-eabi-gcc scLinux*/CMSIS $SC_INSTALL_DIR/
-ADD scLinux*/documentation scLinux*/notices $SC_INSTALL_DIR/
-ADD scLinux*/eclipse scLinux*/SoftConsole.xpm scLinux*/softconsole.sh $SC_INSTALL_DIR/
-ADD scLinux*/extras $SC_INSTALL_DIR/
-ADD scLinux*/openocd scLinux*/gdbinit scLinux*/fpServer $SC_INSTALL_DIR/
-ADD scLinux*/riscv-unknown-elf-gcc $SC_INSTALL_DIR/
-ADD scLinux*/renode $SC_INSTALL_DIR/
+ADD scLinux*/arm-none-eabi-gcc $SC_INSTALL_DIR/arm-none-eabi-gcc/
+ADD scLinux*/CMSIS $SC_INSTALL_DIR/CMSIS/
+ADD scLinux*/documentation $SC_INSTALL_DIR/documentation/
+ADD scLinux*/notices $SC_INSTALL_DIR/notices/
+ADD scLinux*/eclipse $SC_INSTALL_DIR/eclipse/
+ADD scLinux*/SoftConsole.xpm scLinux*/softconsole.sh $SC_INSTALL_DIR/
+ADD scLinux*/extras $SC_INSTALL_DIR/extras/
+ADD scLinux*/openocd $SC_INSTALL_DIR/openocd/
+ADD scLinux*/gdbinit $SC_INSTALL_DIR/gdbinit/
+ADD scLinux*/fpServer $SC_INSTALL_DIR/fpServer/
+ADD scLinux*/riscv-unknown-elf-gcc $SC_INSTALL_DIR/riscv-unknown-elf-gcc/
+ADD scLinux*/renode $SC_INSTALL_DIR/renode/
 
 RUN ls -la $SC_INSTALL_DIR/
 
