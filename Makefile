@@ -147,7 +147,7 @@ softconsoleheadless/.:
 	@echo Extracting SC archive
 	rm -rf ./${IMAGE}/scLinux*  # should remove all directories, but keep the zip
 	unzip ./${IMAGE}/scLinux*.zip -d ./${IMAGE}/
-  chmod -R a+rw ./${IMAGE}/scLinux*/*
+	chmod -R a+rw ./${IMAGE}/scLinux*/*
 
 	@echo
 	@echo Making slim container
