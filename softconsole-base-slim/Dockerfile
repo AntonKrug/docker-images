@@ -16,11 +16,12 @@ RUN dpkg --add-architecture i386 && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+# https://stackoverflow.com/questions/48162574/how-to-circumvent-apt-key-output-should-not-be-parsed
+ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=DontWarn
+
 # Renode dependancies
 RUN apt-get update && \
     apt-get install -y apt-transport-https dirmngr && \
-    sed -i 's%GPG_CMD="gpg %GPG_CMD="gpg --batch %g' /usr/bin/apt-key && \
-    cat /usr/bin/apt-key && 
     apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF && \
     echo "deb https://download.mono-project.com/repo/debian stable-stretch main" | tee /etc/apt/sources.list.d/mono-official-stable.list && \
     apt-get update && \
@@ -28,7 +29,8 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
     
-# Allow wider privileges on new files so they will be easier to delete, in case they will be created by wrong user on a mounted volume
+# Allow wider privileges on new files so they will be easier to delete, in case 
+# they will be created by wrong user on a mounted volume
 RUN echo "" >> /etc/bash.bashrc && \
     echo "umask 0000" >> /etc/bash.bashrc
 

@@ -3,11 +3,17 @@
 FROM debian:9-slim
 MAINTAINER Anton Krug <anton.krug@microchip.com>
 
-# Mono dependancies are needed first as otherwise the next run could end up installing older mono
-# Fixing apt-key no tty issue https://stackoverflow.com/questions/53935949/apt-key-fails-recently-inside-docker
+# Fixing apt-key no tty issue:
+# https://stackoverflow.com/questions/53935949/apt-key-fails-recently-inside-docker
+# https://stackoverflow.com/questions/48162574/how-to-circumvent-apt-key-output-should-not-be-parsed
+
+ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=DontWarn
+
+# Mono dependancies are needed first as otherwise the next run could end up 
+# installing older mono
+
 RUN apt-get update && \
     apt-get install -y apt-transport-https dirmngr && \
-    sed -i 's%GPG_CMD="gpg %GPG_CMD="gpg --batch %g' /usr/bin/apt-key && \      
     apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF && \
     echo "deb https://download.mono-project.com/repo/debian stable-stretch main" | tee /etc/apt/sources.list.d/mono-official-stable.list && \
     apt-get update && \
