@@ -1,6 +1,6 @@
 #Dependancies and tools required to build Renode package
 
-FROM debian:9-slim
+FROM debian:9.8-slim
 MAINTAINER Anton Krug <anton.krug@microchip.com>
 
 # Fixing apt-key no tty issue:
@@ -12,6 +12,7 @@ MAINTAINER Anton Krug <anton.krug@microchip.com>
 # installing older mono
 RUN apt-get update && \
     apt-get install -y apt-transport-https dirmngr && \
+    ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=DontWarn && \
     apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF | grep -q  && \
     echo "deb https://download.mono-project.com/repo/debian stable-stretch main" | tee /etc/apt/sources.list.d/mono-official-stable.list && \
     apt-get update && \
