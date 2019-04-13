@@ -15,13 +15,18 @@ RUN dpkg --add-architecture i386 && \
     apt-get install -y libstdc++6:i386  && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
+    
+# Fixing apt-key no tty issue:
+# https://stackoverflow.com/questions/53935949/apt-key-fails-recently-inside-docker
+# https://stackoverflow.com/questions/48162574/how-to-circumvent-apt-key-output-should-not-be-parsed
+ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=DontWarn
 
 # https://stackoverflow.com/questions/48162574/how-to-circumvent-apt-key-output-should-not-be-parsed
 # Renode dependancies
 RUN apt-get update && \
     apt-get install -y apt-transport-https dirmngr && \
-    apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF | grep -q && \
-    echo "deb https://download.mono-project.com/repo/debian stable-stretch main" | tee /etc/apt/sources.list.d/mono-official-stable.list && \
+    apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF && \
+    echo "deb https://download.mono-project.com/repo/debian stable-stretch main" > /etc/apt/sources.list.d/mono-official-stable.list && \
     apt-get update && \
     apt-get install -y mono-complete gtk-sharp2 libcanberra-gtk-module && \
     apt-get clean && \
