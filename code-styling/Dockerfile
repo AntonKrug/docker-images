@@ -1,4 +1,4 @@
-# To build mingw projects which use fairly new cmake
+# To run formating and linting tools
 
 FROM debian:9-slim
 MAINTAINER Anton Krug <anton.krug@microchip.com>
