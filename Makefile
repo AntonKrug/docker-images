@@ -1,4 +1,4 @@
-SC_CAPTURE ?= 5.4 # feed from the Jenkins job, update the values in the job itself
+SC_CAPTURE ?= 6.0 # feed from the Jenkins job, update the values in the job itself
 SHELL = bash
 SUBDIRS   := $(wildcard */.)
 MAKEFLAGS := --jobs=1  # force sequential execution as docker doesn't like concurent
