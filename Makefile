@@ -59,8 +59,8 @@ status:
 clean:
 	# Try to remove previous containers so they will not keep piling up
 	@echo "Clean up existing containers and images"
-	docker ps -a -q -f status=exited | xargs --no-run-if-empty docker rm -v
-	docker images -q -f dangling=true | xargs --no-run-if-empty docker rmi
+	#docker ps -a -q -f status=exited | xargs --no-run-if-empty docker rm -v
+	#docker images -q -f dangling=true | xargs --no-run-if-empty docker rmi
 
 
 $(SUBDIRS):
