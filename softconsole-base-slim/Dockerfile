@@ -31,6 +31,17 @@ RUN apt-get update && \
     apt-get install -y mono-complete gtk-sharp2 libcanberra-gtk-module && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
+
+# Get all apt dependancies for building the Renode package (if that is needed)
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends git automake autoconf libtool g++ realpath policykit-1 libgtk2.0-dev screen uml-utilities gtk-sharp2 python2.7 && \
+    apt-get install -y --no-install-recommends python-pip python-setuptools python-dev ruby ruby-dev build-essential rpm bsdtar && \
+    gem install fpm && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# Robot framework dependancies
+RUN python2.7 -m pip install --no-cache-dir robotframework netifaces requests psutil    
     
 # Allow wider privileges on new files so they will be easier to delete, in case 
 # they will be created by wrong user on a mounted volume
