@@ -42,6 +42,13 @@ RUN apt-get update && \
 
 # Robot framework dependancies
 RUN python2.7 -m pip install --no-cache-dir robotframework netifaces requests psutil    
+
+# This container has already root access, but for scripts which assume the sudo is installed
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends sudo && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
     
 # Allow wider privileges on new files so they will be easier to delete, in case 
 # they will be created by wrong user on a mounted volume
