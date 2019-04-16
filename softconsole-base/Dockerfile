@@ -3,6 +3,9 @@
 FROM antonkrug/softconsole-base-slim
 MAINTAINER Anton Krug <anton.krug@microsemi.com>
 
+# One of the ways to use the X11 is:
+# docker run --rm -it -e DISPLAY -v $XAUTHORITY:/root/.Xauthority --net=host antonkrug/softconsole-base
+
 # build-essential(make is needed by softconsole, gcc needed by renode) and few fundamental tools
 RUN apt-get update && \
     echo "wireshark-common	wireshark-common/install-setuid	boolean	false" | debconf-set-selections && \
