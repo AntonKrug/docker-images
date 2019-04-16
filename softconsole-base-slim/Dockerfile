@@ -45,7 +45,7 @@ RUN python2.7 -m pip install --no-cache-dir robotframework netifaces requests ps
 
 # This container has already root access, but for scripts which assume the sudo is installed
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends sudo && \
+    apt-get install -y --no-install-recommends sudo debconf && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
