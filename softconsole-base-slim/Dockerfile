@@ -43,6 +43,9 @@ RUN apt-get update && \
 # Robot framework dependancies
 RUN python2.7 -m pip install --no-cache-dir robotframework netifaces requests psutil    
 
+# Additional Robot framework plugins
+RUN python2.7 -m pip install --no-cache-dir robotframework-seriallibrary robotframework-datadriver
+
 # This container has already root access, but for scripts which assume the sudo is installed
 RUN apt-get update && \
     apt-get install -y --no-install-recommends sudo debconf && \
