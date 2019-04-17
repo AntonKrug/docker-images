@@ -43,6 +43,9 @@ RUN apt-get update && \
 # Robot framework dependancies
 RUN python2.7 -m pip install --no-cache-dir robotframework netifaces requests psutil    
 
+# Solving https://stackoverflow.com/questions/34819221/why-is-python-setup-py-saying-invalid-command-bdist-wheel-on-travis-ci
+RUN python2.7 -m pip install --no-cache-dir wheel
+
 # Additional Robot framework plugins
 RUN python2.7 -m pip install --no-cache-dir robotframework-seriallibrary robotframework-datadriver
 
