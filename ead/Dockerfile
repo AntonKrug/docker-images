@@ -1,7 +1,7 @@
 # To build mingw projects which use fairly new cmake
 
 FROM debian:9-slim
-MAINTAINER Anton Krug <anton.krug@microsemi.com>
+MAINTAINER Anton Krug <anton.krug@microchip.com>
 
 RUN apt-get update && apt-get install -y wget && apt-get clean && rm -rf /var/lib/apt/lists/*
 
