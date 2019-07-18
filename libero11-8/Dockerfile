@@ -1,7 +1,7 @@
 # All dependancies for Liber 11.8
 
 FROM centos:6.9
-MAINTAINER Anton Krug <anton.krug@microsemi.com>
+MAINTAINER Anton Krug <anton.krug@microchip.com>
 
 # Basic dependancies
 RUN yum install -y info mc git wget vim curl htop joe zip p7zip yum-utils && \

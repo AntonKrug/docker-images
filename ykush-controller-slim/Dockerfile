@@ -1,7 +1,7 @@
 # Slim version to access ykush USB controller
 
 FROM debian:9-slim
-MAINTAINER Anton Krug <anton.krug@microsemi.com>
+MAINTAINER Anton Krug <anton.krug@microchip.com>
 
 
 # Get all dependancies, compile, install and wipe after finished

@@ -1,7 +1,7 @@
 #Verilator and nodeJS v8 container
 
 FROM debian:8-slim
-MAINTAINER Anton Krug <anton.krug@microsemi.com>
+MAINTAINER Anton Krug <anton.krug@microchip.com>
 
 # Get all dependancies 
 RUN apt-get update && \

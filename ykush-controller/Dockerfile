@@ -1,7 +1,7 @@
 # Access ykush USB controller from distributions which have trouble to compile the tool
 
 FROM ubuntu:16.04
-MAINTAINER Anton Krug <anton.krug@microsemi.com>
+MAINTAINER Anton Krug <anton.krug@microchip.com>
 
 
 # Get all dependancies

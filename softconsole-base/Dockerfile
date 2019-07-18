@@ -1,7 +1,7 @@
 # All dependancies for SoftConsole install and X11-forwarding/VNC
 
 FROM antonkrug/softconsole-base-slim
-MAINTAINER Anton Krug <anton.krug@microsemi.com>
+MAINTAINER Anton Krug <anton.krug@microchip.com>
 
 # One of the ways to use the X11 is:
 # docker run --rm -it -e DISPLAY -v $XAUTHORITY:/root/.Xauthority --net=host antonkrug/softconsole-base

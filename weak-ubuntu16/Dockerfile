@@ -2,7 +2,7 @@
 # It's very weak container, do not use anywhere
 
 FROM ubuntu:16.04
-MAINTAINER Anton Krug <anton.krug@microsemi.com>
+MAINTAINER Anton Krug <anton.krug@microchip.com>
 
 
 RUN apt-get update && \

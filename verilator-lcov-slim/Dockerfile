@@ -1,7 +1,7 @@
 #Verilator with lcov support and nodeJS v8 container
 
 FROM debian:8-slim
-MAINTAINER Anton Krug <anton.krug@microsemi.com>
+MAINTAINER Anton Krug <anton.krug@microchip.com>
 
 # Get all dependancies, install nodejs. Get, build and install verilator and clean behind itself in 1 step/layer
 RUN apt-get update && \

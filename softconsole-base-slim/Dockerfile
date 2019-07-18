@@ -1,7 +1,7 @@
 # All dependancies for SoftConsole install and X11-forwarding/VNC
 
 FROM debian:9-slim
-MAINTAINER Anton Krug <anton.krug@microsemi.com>
+MAINTAINER Anton Krug <anton.krug@microchip.com>
 
 # build-essential(make is needed by softconsole, gcc needed by renode) and few fundamental tools
 RUN apt-get update && \
