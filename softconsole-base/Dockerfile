@@ -11,7 +11,7 @@ ENV DEBIAN_FRONTEND noninteractive
 # build-essential(make is needed by softconsole, gcc needed by renode) and few fundamental tools
 RUN apt-get update && \
     echo "wireshark-common	wireshark-common/install-setuid	boolean	false" | debconf-set-selections && \
-    apt-get install -y xdg-utils mc net-tools aptitude p7zip-full firefox-esr gedit x11-apps x11vnc xvfb systemd wireshark wmctrl xserver-xephyr xnest metacity xvfb && \
+    apt-get install -y xdg-utils mc net-tools aptitude p7zip-full firefox-esr gedit x11-apps x11vnc xvfb systemd wireshark wmctrl xserver-xephyr xnest metacity xvfb default-jre default-jdk default-jdk-headless && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*    
     
