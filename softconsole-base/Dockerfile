@@ -28,6 +28,18 @@ RUN apt-get update && \
 RUN mkdir ~/.vnc
 RUN x11vnc -storepasswd password ~/.vnc/passwd
 
+# YKUSH download, extract sources, compile, install the files, delete original sources
+RUN wget --no-check-certificate https://www.yepkit.com/uploads/documents/68548_ykushcmd_master_20171130.zip && \
+    unzip *.zip && \
+    rm *.zip && \
+    cd ykush-master && \
+    ./build.sh ; \
+    ./install.sh ; \
+    mkdir -p /doc && \
+    cp ./doc/*.txt /doc/ && \
+    cd .. && \
+    rm -rf ykush-master
+
 ENV HOME=/root/
 
 VOLUME /docker_shares/common
