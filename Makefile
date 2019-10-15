@@ -1,4 +1,5 @@
 SC_CAPTURE ?= 6.2 # feed from the Jenkins job, update the values in the job itself
+SC_POSTFIX ?= generic # feed from the Jenkins job, update the values in the job itself
 SHELL = bash
 SUBDIRS   := $(wildcard */.)
 MAKEFLAGS := --jobs=1  # force sequential execution as docker doesn't like concurent
@@ -156,33 +157,33 @@ softconsoleheadless/.:
 
 	@echo
 	@echo Making slim container
-	time docker build -t ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${SC_COMMIT_HASH}-${TS}-slim -f ./${IMAGE}/Dockerfile.slim ./${IMAGE}
+	time docker build -t ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${SC_COMMIT_HASH}-${TS}-${SC_POSTFIX}-slim -f ./${IMAGE}/Dockerfile.slim ./${IMAGE}
 
 	@echo
 	@echo Making full container
-	time docker build -t ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${SC_COMMIT_HASH}-${TS} -f ./${IMAGE}/Dockerfile.full ./${IMAGE}
+	time docker build -t ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${SC_COMMIT_HASH}-${TS}-${SC_POSTFIX} -f ./${IMAGE}/Dockerfile.full ./${IMAGE}
 	
 	@echo
 	@echo Tagging slim and full containers to a capture and to the "latest" tags
-	docker tag -f ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${SC_COMMIT_HASH}-${TS}-slim ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-slim
-	docker tag -f ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${SC_COMMIT_HASH}-${TS}-slim ${DOCKER_USER}/${IMAGE}:latest-slim
-	docker tag -f ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${SC_COMMIT_HASH}-${TS} ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}
-	docker tag -f ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${SC_COMMIT_HASH}-${TS} ${DOCKER_USER}/${IMAGE}:latest
+	docker tag -f ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${SC_COMMIT_HASH}-${TS}-${SC_POSTFIX}-slim ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${SC_POSTFIX}-slim
+	docker tag -f ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${SC_COMMIT_HASH}-${TS}-${SC_POSTFIX}-slim ${DOCKER_USER}/${IMAGE}-${SC_POSTFIX}:latest-slim
+	docker tag -f ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${SC_COMMIT_HASH}-${TS}-${SC_POSTFIX} ${DOCKER_USER}/${IMAGE}-${SC_POSTFIX}:${SC_CAPTURE}
+	docker tag -f ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${SC_COMMIT_HASH}-${TS}-${SC_POSTFIX} ${DOCKER_USER}/${IMAGE}-${SC_POSTFIX}:latest
 	
 	@echo
 	@echo "Docker push CAPTURE-GITHASH-TS tag"
-	docker push ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${SC_COMMIT_HASH}-${TS}-slim
-	docker push ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${SC_COMMIT_HASH}-${TS}
+	docker push ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${SC_COMMIT_HASH}-${TS}-${SC_POSTFIX}-slim
+	docker push ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${SC_COMMIT_HASH}-${TS}-${SC_POSTFIX}
 	
 	@echo
 	@echo "Docker push CAPTURE tag"
-	docker push ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-slim
-	docker push ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}
+	docker push ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${SC_POSTFIX}-slim
+	docker push ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${SC_POSTFIX}
 	
 	@echo
 	@echo "Docker push latest tag"
-	docker push ${DOCKER_USER}/${IMAGE}:latest-slim
-	docker push ${DOCKER_USER}/${IMAGE}:latest
+	docker push ${DOCKER_USER}/${IMAGE}-${SC_POSTFIX}:latest-slim
+	docker push ${DOCKER_USER}/${IMAGE}-${SC_POSTFIX}:latest
 
 
 login-email:
