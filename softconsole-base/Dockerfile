@@ -21,6 +21,7 @@ RUN apt-get update && \
     apt-get install -y wmctrl xserver-xephyr xnest metacity xvfb && \
     apt-get install -y default-jre default-jdk default-jdk-headless && \
     apt-get install -y pandoc texlive-xetex texlive-fonts-recommended lmodern && \
+    apt-get install -y libhidapi-libusb0 && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*    
     
