@@ -166,9 +166,9 @@ softconsoleheadless/.:
 	@echo
 	@echo Tagging slim and full containers to a capture and to the "latest" tags
 	docker tag -f ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${SC_COMMIT_HASH}-${TS}-${SC_POSTFIX}-slim ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${SC_POSTFIX}-slim
-	docker tag -f ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${SC_COMMIT_HASH}-${TS}-${SC_POSTFIX}-slim ${DOCKER_USER}/${IMAGE}-${SC_POSTFIX}:latest-slim
-	docker tag -f ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${SC_COMMIT_HASH}-${TS}-${SC_POSTFIX} ${DOCKER_USER}/${IMAGE}-${SC_POSTFIX}:${SC_CAPTURE}
-	docker tag -f ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${SC_COMMIT_HASH}-${TS}-${SC_POSTFIX} ${DOCKER_USER}/${IMAGE}-${SC_POSTFIX}:latest
+	docker tag -f ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${SC_COMMIT_HASH}-${TS}-${SC_POSTFIX}-slim ${DOCKER_USER}/${IMAGE}:latest-${SC_POSTFIX}-slim
+	docker tag -f ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${SC_COMMIT_HASH}-${TS}-${SC_POSTFIX} ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${SC_POSTFIX}
+	docker tag -f ${DOCKER_USER}/${IMAGE}:${SC_CAPTURE}-${TAG}-${SC_COMMIT_HASH}-${TS}-${SC_POSTFIX} ${DOCKER_USER}/${IMAGE}:latest-${SC_POSTFIX}
 	
 	@echo
 	@echo "Docker push CAPTURE-GITHASH-TS tag"
@@ -182,8 +182,8 @@ softconsoleheadless/.:
 	
 	@echo
 	@echo "Docker push latest tag"
-	docker push ${DOCKER_USER}/${IMAGE}-${SC_POSTFIX}:latest-slim
-	docker push ${DOCKER_USER}/${IMAGE}-${SC_POSTFIX}:latest
+	docker push ${DOCKER_USER}/${IMAGE}:latest-${SC_POSTFIX}-slim
+	docker push ${DOCKER_USER}/${IMAGE}:latest-${SC_POSTFIX}
 
 
 login-email:
