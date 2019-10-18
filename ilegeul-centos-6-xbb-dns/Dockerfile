@@ -17,7 +17,7 @@ MAINTAINER Anton Krug <anton.krug@microchip.com>
 #
 # Note: This is a 64-bit container, for 32-bit there ilegeul/centos32:6-xbb-v2.2
 
-RUN echo "10.204.34.11" > /etc/resolv.conf 
+RUN echo "nameserver 10.204.34.11" > /etc/resolv.conf 
 
 
 VOLUME /docker_shares/common
