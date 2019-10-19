@@ -22,6 +22,7 @@ ADD scLinux*/gdbinit $SC_INSTALL_DIR/gdbinit/
 ADD scLinux*/fpServer $SC_INSTALL_DIR/fpServer/
 ADD scLinux*/riscv-unknown-elf-gcc $SC_INSTALL_DIR/riscv-unknown-elf-gcc/
 ADD scLinux*/renode $SC_INSTALL_DIR/renode/
+ADD scLinux*/renode-microchip-mods $SC_INSTALL_DIR/renode-microchip-mods
 
 RUN ls -la $SC_INSTALL_DIR/
 
