@@ -83,10 +83,12 @@ $(SUBDIRS):
 
 	@echo
 	@echo "Making container with current GITHASH ${TAG} tag"
-	time cat ./${IMAGE}/Dockerfile | docker build -t ${DOCKER_USER}/${IMAGE}:${TAG} -
+	# https://stackoverflow.com/questions/47977699
+	time docker build -t ${DOCKER_USER}/${IMAGE}:${TAG} -f ./${IMAGE}/Dockerfile ./${IMAGE}
 
 	@echo
 	@echo "Tagging current hash container as the latest GITHASH ${TAG} -> latest"
+	# This is running on older 1.7 docker https://forums.docker.com/t/docker-1-12-breaks-docker-tag-f-in-scripts/16992
 	docker tag -f ${DOCKER_USER}/${IMAGE}:${TAG} ${DOCKER_USER}/${IMAGE}:latest
 
 	@echo
