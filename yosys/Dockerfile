@@ -43,7 +43,7 @@ RUN apt-get update && \
 
 # X11 / vnc stuff - storing weak vnc password
 RUN apt-get update && \
-    apt-get install -y xdg-utils x11-apps x11vnc xvfb fluxbox xterm && \
+    apt-get install -y xdg-utils x11-apps x11vnc xvfb fluxbox xterm gtkwave && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     mkdir ~/.vnc && \
