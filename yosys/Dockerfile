@@ -54,4 +54,36 @@ RUN echo "" >> /etc/bash.bashrc && \
     echo "umask 0000" >> /etc/bash.bashrc
 
 
+# Building icestorm
+RUN git clone https://github.com/cliffordwolf/icestorm.git && \
+    cd icestorm && \
+    make -j2 && \
+    sudo make install && \
+    cd .. && \
+    rm -rf icestorm && \
+    mkdir -p /etc/udev/rules.d/ && \
+    echo "ATTRS{idVendor}==\"0403\", ATTRS{idProduct}==\"6010\", MODE=\"0660\", GROUP=\"plugdev\", TAG+=\"uaccess\"" > /etc/udev/rules.d/53-lattice-ftdi.rules
+
+
+# Building yosys
+RUN git clone https://github.com/cliffordwolf/yosys.git && \
+    cd yosys && \
+    make config-clang && \
+    make -j2 && \
+    make test && \
+    sudo make install && \
+    cd .. && \
+    rm -rf yosys
+
+
+# Building nextpnr
+RUN git clone https://github.com/YosysHQ/nextpnr.git && \
+    cd nextpnr && \
+    cmake -DARCH=ice40 . && \
+    make -j2 && \
+    sudo make install && \
+    cd .. && \
+    rm -rf nextpnr
+
+
 VOLUME /docker_shares/common
