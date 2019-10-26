@@ -86,7 +86,7 @@ RUN git clone https://github.com/YosysHQ/nextpnr.git && \
 
 
 ADD start_vnc_server.sh /bin/start_vnc_server.sh
-RUN chomod a+x /bin/start_vnc_server.sh
+RUN chmod a+x /bin/start_vnc_server.sh
 # docker run --rm -it --net=host antonkrug/yosys bash -c start_vnc_server.sh && xterm
 
 VOLUME /docker_shares/common
