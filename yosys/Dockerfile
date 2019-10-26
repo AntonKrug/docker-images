@@ -36,7 +36,7 @@ RUN apt-get update && \
 # additional packages 
 RUN apt-get update && \
     apt-get install -y sudo debconf aptitude net-tools systemd && \
-    apt-get install -y sudo mc htop && \
+    apt-get install -y sudo mc htop screen tmux && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
