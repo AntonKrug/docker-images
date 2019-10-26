@@ -8,6 +8,7 @@ ENV DEBIAN_FRONTEND noninteractive
 # https://stackoverflow.com/questions/53935949
 # https://stackoverflow.com/questions/48162574
 ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=DontWarn
+ENV DISPLAY=:1
 
 
 # build-essential
