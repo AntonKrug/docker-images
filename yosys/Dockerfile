@@ -70,7 +70,6 @@ RUN git clone https://github.com/cliffordwolf/yosys.git && \
     cd yosys && \
     make config-clang && \
     make -j2 && \
-    make test && \
     sudo make install && \
     cd .. && \
     rm -rf yosys
