@@ -1,4 +1,4 @@
-# All dependancies for SoftConsole install and X11-forwarding/VNC
+# All dependancies working yosys -> nextpnbr -> icestorm -> ice40 flow
 
 FROM debian:9-slim
 MAINTAINER Anton Krug <anton.krug@microchip.com>
@@ -85,5 +85,8 @@ RUN git clone https://github.com/YosysHQ/nextpnr.git && \
     cd .. && \
     rm -rf nextpnr
 
+
+ADD yosys/start_vnc_server.sh /bin/start_vnc_server.sh
+# docker run --rm -it --net=host antonkrug/yosys bash -c start_vnc_server.sh && xterm
 
 VOLUME /docker_shares/common
