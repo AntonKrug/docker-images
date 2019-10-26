@@ -82,11 +82,11 @@ $(SUBDIRS):
 	docker pull ${BASE_IMAGE}
 
 	@echo
-	@echo "Tagging current hash container as the latest:"
-	@echo "GITHASH -> latest"
+	@echo "Making container with current GITHASH ${TAG} tag"
 	time cat ./${IMAGE}/Dockerfile | docker build -t ${DOCKER_USER}/${IMAGE}:${TAG} -
 
 	@echo
+	@echo "Tagging current hash container as the latest GITHASH ${TAG} -> latest"
 	docker tag -f ${DOCKER_USER}/${IMAGE}:${TAG} ${DOCKER_USER}/${IMAGE}:latest
 
 	@echo
