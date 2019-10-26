@@ -1,5 +1,6 @@
 SC_CAPTURE ?= 6.2 # feed from the Jenkins job, update the values in the job itself
 SC_POSTFIX ?= generic # feed from the Jenkins job, update the values in the job itself
+DOCKER_USER ?= antonkrug
 SHELL = bash
 SUBDIRS   := $(wildcard */.)
 MAKEFLAGS := --jobs=1  # force sequential execution as docker doesn't like concurent
