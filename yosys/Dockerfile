@@ -13,9 +13,9 @@ ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=DontWarn
 # build-essential
 RUN apt-get update && \
     apt-get install -y build-essential wget git vim p7zip-full unzip && \
-    apt-get install -y cmake clang clang-format clang-tidy clang-tools && \
+    apt-get install -y cmake clang clang-format clang-tidy clang-tools-7 && \
     apt-get install -y libhidapi-libusb0 libusb-1.0-0-dev libusb-1.0-0 libudev-dev libudev1 && \
-    apt-get install -y ftdi_eeprom libftdi-dev libffi-dev libreadline-dev tcl-dev && \   
+    apt-get install -y ftdi-eeprom libftdi-dev libffi-dev libreadline-dev tcl-dev && \   
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*    
 
