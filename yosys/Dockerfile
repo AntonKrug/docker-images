@@ -60,8 +60,7 @@ RUN git clone https://github.com/cliffordwolf/icestorm.git && \
     cd icestorm && \
     make -j2 && \
     sudo make install && \
-    cd .. && \
-    rm -rf icestorm && \
+    make clean && \
     mkdir -p /etc/udev/rules.d/ && \
     echo "ATTRS{idVendor}==\"0403\", ATTRS{idProduct}==\"6010\", MODE=\"0660\", GROUP=\"plugdev\", TAG+=\"uaccess\"" > /etc/udev/rules.d/53-lattice-ftdi.rules
 
@@ -72,8 +71,7 @@ RUN git clone https://github.com/cliffordwolf/yosys.git && \
     make config-clang && \
     make -j2 && \
     sudo make install && \
-    cd .. && \
-    rm -rf yosys
+    make clean
 
 
 # Building nextpnr
@@ -82,8 +80,7 @@ RUN git clone https://github.com/YosysHQ/nextpnr.git && \
     cmake -DARCH=ice40 . && \
     make -j2 && \
     sudo make install && \
-    cd .. && \
-    rm -rf nextpnr
+    make clean
 
 
 ADD start_vnc_server.sh /bin/start_vnc_server.sh
