@@ -64,7 +64,7 @@ RUN git clone https://github.com/cliffordwolf/yosys.git && \
     make clean
 
 
-# Building nextpnr
+# Building nextpnr without gui
 RUN git clone https://github.com/YosysHQ/nextpnr.git && \
     cd nextpnr && \
     cmake -DARCH=ice40 -DBUILD_GUI=OFF . && \
