@@ -12,10 +12,9 @@ ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=DontWarn
 ENV PATH="${PATH}:/usr/local/bin"
 
 
-# build-essential
+# getting base depedencies except the clang as that one is large
 RUN apt-get update && \
-    apt-get install -y build-essential wget git vim p7zip-full unzip && \
-    apt-get install -y cmake clang clang-format clang-tidy clang-tools-7 && \
+    apt-get install -y build-essential wget git vim p7zip-full unzip cmake  && \
     apt-get install -y libhidapi-libusb0 libusb-1.0-0-dev libusb-1.0-0 libudev-dev libudev1 && \
     apt-get install -y ftdi-eeprom libftdi-dev libffi-dev libreadline-dev tcl-dev && \   
     apt-get clean && \
@@ -44,45 +43,45 @@ RUN apt-get update && \
 RUN echo "" >> /etc/bash.bashrc && \
     echo "umask 0000" >> /etc/bash.bashrc
 
-
-# Building icestorm
-RUN git clone https://github.com/cliffordwolf/icestorm.git && \
+# adding clang, getting all the tools, building them and then removing clang to keep the container
+RUN apt-get update && \
+    apt-get install -y clang clang-format clang-tidy clang-tools-7 && \
+    echo "Building icestorm" && \
+    git clone https://github.com/cliffordwolf/icestorm.git && \
     cd icestorm && \
     make -j2 && \
     sudo make install && \
-    make clean && \
     mkdir -p /etc/udev/rules.d/ && \
-    echo "ATTRS{idVendor}==\"0403\", ATTRS{idProduct}==\"6010\", MODE=\"0660\", GROUP=\"plugdev\", TAG+=\"uaccess\"" > /etc/udev/rules.d/53-lattice-ftdi.rules
-
-
-# Building yosys
-RUN git clone https://github.com/cliffordwolf/yosys.git && \
+    echo "ATTRS{idVendor}==\"0403\", ATTRS{idProduct}==\"6010\", MODE=\"0660\", GROUP=\"plugdev\", TAG+=\"uaccess\"" > /etc/udev/rules.d/53-lattice-ftdi.rules && \
+    cd .. && \
+    rm -rf icestorm && \
+    echo "Building yosys" && \
+    git clone https://github.com/cliffordwolf/yosys.git && \
     cd yosys && \
     make config-clang && \
     make -j2 && \
     sudo make install && \
-    make clean
-
-
-# Building nextpnr without gui
-RUN git clone https://github.com/YosysHQ/nextpnr.git && \
+    cd .. && \
+    rm -rf yosys && \
+    echo "Building nextpnr without gui" && \
+    git clone https://github.com/YosysHQ/nextpnr.git && \
     cd nextpnr && \
     cmake -DARCH=ice40 -DBUILD_GUI=OFF . && \
     make -j2 && \
     sudo make install && \
-    make clean
-
-
-# Getting the icotools (icezero example, SoC example)
-RUN git clone https://github.com/cliffordwolf/icotools.git
-
-
-# Building arachne, the older place&route arachne-pnr
-RUN git clone https://github.com/cseed/arachne-pnr.git arachne-pnr && \
+    cd .. && \
+    rm -rf nextpnr && \
+    echo "Building arachne, the older place&route package" && \
+    git clone https://github.com/cseed/arachne-pnr.git arachne-pnr && \
     cd arachne-pnr && \
     make -j$(nproc) && \
     sudo make install && \
-    make clean
+    cd .. && \
+    rm -rf arachne-pnr && \
+    apt-get remove -y --purge clang clang-format clang-tidy clang-tools-7 && \
+    apt-get autoremove -y && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 
 VOLUME /docker_shares/common
