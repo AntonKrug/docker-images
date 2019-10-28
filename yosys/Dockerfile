@@ -23,6 +23,9 @@ RUN apt-get update && \
     mkdir ~/.vnc && \
     x11vnc -storepasswd password ~/.vnc/passwd 
 
+# Getting the icotools (icezero example, SoC example)
+RUN git clone https://github.com/cliffordwolf/icotools.git
+
 
 # Building gui variant of nextpnr
 RUN cd nextpnr && \
@@ -30,6 +33,9 @@ RUN cd nextpnr && \
     make -j2 && \
     sudo make install && \
     make clean
+
+
+
 
 
 ADD start_vnc_server.sh /bin/start_vnc_server.sh
