@@ -1,4 +1,6 @@
 # All dependancies working yosys -> nextpnbr -> icestorm -> ice40 flow
+# In spirit of Symbiflow. On top of the slim variant it adds X11 VNC server
+# add VNC client can connect and use the nextpnr GUI interactively 
 
 FROM FROM antonkrug/yosys-slim:latest
 MAINTAINER Anton Krug <anton.krug@microchip.com>
@@ -6,7 +8,7 @@ MAINTAINER Anton Krug <anton.krug@microchip.com>
 ENV DISPLAY=:1
 
 
-# additional packages 
+# Additional packages on top of slim variant
 RUN apt-get update && \
     apt-get install -y debconf aptitude net-tools systemd && \
     apt-get install -y mc htop && \
@@ -23,11 +25,12 @@ RUN apt-get update && \
     mkdir ~/.vnc && \
     x11vnc -storepasswd password ~/.vnc/passwd 
 
+
 # Getting the icotools (icezero example, SoC example)
 RUN git clone https://github.com/cliffordwolf/icotools.git
 
 
-# Building gui variant of nextpnr
+# Building GUI variant of nextpnr
 RUN apt-get update && \
     apt-get install -y clang clang-format clang-tidy clang-tools-7 && \
     git clone https://github.com/YosysHQ/nextpnr.git && \
@@ -43,6 +46,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 
+# Adding script which helps to start the VNC server
 ADD start_vnc_server.sh /bin/start_vnc_server.sh
 RUN chmod a+x /bin/start_vnc_server.sh
 # docker run --rm -it --net=host antonkrug/yosys bash -c "start_vnc_server.sh && xterm"
