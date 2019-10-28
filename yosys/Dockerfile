@@ -2,7 +2,7 @@
 # In spirit of Symbiflow. On top of the slim variant it adds X11 VNC server
 # add VNC client can connect and use the nextpnr GUI interactively 
 
-FROM FROM antonkrug/yosys-slim:latest
+FROM antonkrug/yosys-slim:latest
 MAINTAINER Anton Krug <anton.krug@microchip.com>
 
 ENV DISPLAY=:1
