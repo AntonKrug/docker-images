@@ -33,6 +33,12 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/* && \
     python3 -m pip install --no-cache-dir wheel
 
+# additional packages 
+RUN apt-get update && \
+    apt-get install -y sudo screen tmux && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
 
 # Allow wider privileges on new files so they will be easier to delete from the mounted volumes
 RUN echo "" >> /etc/bash.bashrc && \
