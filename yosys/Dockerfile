@@ -83,6 +83,18 @@ RUN git clone https://github.com/YosysHQ/nextpnr.git && \
     make clean
 
 
+# Getting the icotools (icezero example, SoC example)
+RUN git clone https://github.com/cliffordwolf/icotools.git
+
+
+# Building older place&route arachne-pnr
+RUN git clone https://github.com/cseed/arachne-pnr.git arachne-pnr && \
+    cd arachne-pnr && \
+    make -j$(nproc) && \
+    sudo make install && \
+    make clean
+
+
 ADD start_vnc_server.sh /bin/start_vnc_server.sh
 RUN chmod a+x /bin/start_vnc_server.sh
 # docker run --rm -it --net=host antonkrug/yosys bash -c "start_vnc_server.sh && xterm"
