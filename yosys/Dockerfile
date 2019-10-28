@@ -28,14 +28,19 @@ RUN git clone https://github.com/cliffordwolf/icotools.git
 
 
 # Building gui variant of nextpnr
-RUN cd nextpnr && \
+RUN apt-get update && \
+    apt-get install -y clang clang-format clang-tidy clang-tools-7 && \
+    git clone https://github.com/YosysHQ/nextpnr.git && \
+    cd nextpnr && \
     cmake -DARCH=ice40 . && \
     make -j2 && \
     sudo make install && \
-    make clean
-
-
-
+    cd .. && \
+    rm -rf nextpnr && \
+    apt-get remove -y --purge clang clang-format clang-tidy clang-tools-7 && \
+    apt-get autoremove -y && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 
 ADD start_vnc_server.sh /bin/start_vnc_server.sh
