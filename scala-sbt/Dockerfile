@@ -40,7 +40,6 @@ RUN echo "deb https://dl.bintray.com/sbt/debian /" | sudo tee -a /etc/apt/source
 RUN apt-get update && \
     apt-get install -y git make autoconf g++ flex bison && \
     git clone http://git.veripool.org/git/verilator && \
-    unsetenv VERILATOR_ROOT  && \
     unset VERILATOR_ROOT && \
     cd verilator && \
     git pull && \
