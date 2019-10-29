@@ -50,7 +50,7 @@ RUN apt-get update && \
     git clone https://github.com/cliffordwolf/icestorm.git && \
     cd icestorm && \
     make -j2 && \
-    sudo make install && \
+    make install && \
     mkdir -p /etc/udev/rules.d/ && \
     echo "ATTRS{idVendor}==\"0403\", ATTRS{idProduct}==\"6010\", MODE=\"0660\", GROUP=\"plugdev\", TAG+=\"uaccess\"" > /etc/udev/rules.d/53-lattice-ftdi.rules && \
     cd .. && \
@@ -60,7 +60,7 @@ RUN apt-get update && \
     cd yosys && \
     make config-clang && \
     make -j2 && \
-    sudo make install && \
+    make install && \
     cd .. && \
     rm -rf yosys && \
     echo "Building nextpnr without gui" && \
@@ -68,14 +68,14 @@ RUN apt-get update && \
     cd nextpnr && \
     cmake -DARCH=ice40 -DBUILD_GUI=OFF . && \
     make -j2 && \
-    sudo make install && \
+    make install && \
     cd .. && \
     rm -rf nextpnr && \
     echo "Building arachne, the older place&route package" && \
     git clone https://github.com/cseed/arachne-pnr.git arachne-pnr && \
     cd arachne-pnr && \
     make -j$(nproc) && \
-    sudo make install && \
+    make install && \
     cd .. && \
     rm -rf arachne-pnr && \
     apt-get remove -y --purge clang clang-format clang-tidy clang-tools-7 && \
