@@ -17,9 +17,9 @@ RUN echo "" >> /etc/bash.bashrc && \
 
 # getting java jdk 8
 RUN apt-get update && \
+    apt-get install -y software-properties-common sudo && \
     add-apt-repository -y ppa:openjdk-r/ppa && \
     apt-get update && \
-    apt-get install -y sudo && \
     apt-get install -y openjdk-8-jdk && \
     update-alternatives --config java && \
     update-alternatives --config javac && \
