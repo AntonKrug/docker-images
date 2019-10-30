@@ -24,7 +24,7 @@ RUN apt-get update && \
     apt-get install -y openjdk-8-jdk && \
     update-alternatives --config java && \
     update-alternatives --config javac && \
-    update-ca-certificates -f
+    update-ca-certificates -f && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*    
 
