@@ -12,6 +12,11 @@ ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=DontWarn
 ENV PATH="${PATH}:/usr/local/bin"
 
 
+# wide privileges on new files, they can deleted easily from the mounted volumes
+RUN echo "" >> /etc/bash.bashrc && \
+    echo "umask 0000" >> /etc/bash.bashrc
+
+
 # getting base depedencies except the clang as that one is large
 RUN apt-get update && \
     apt-get install -y build-essential wget git vim p7zip-full unzip cmake  && \
