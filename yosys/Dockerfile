@@ -50,8 +50,11 @@ RUN apt-get update && \
 
 
 # Adding script which helps to start the VNC server
+# docker run --rm -it --net=host antonkrug/yosys bash -c "start_vnc_server.sh && xterm"
 ADD start_vnc_server.sh /bin/start_vnc_server.sh
 RUN chmod a+x /bin/start_vnc_server.sh
-# docker run --rm -it --net=host antonkrug/yosys bash -c "start_vnc_server.sh && xterm"
+
+ADD nextprn_gui_demo.sh /bin/nextprn_gui_demo.sh
+RUN chmod a+x /bin/nextprn_gui_demo.sh
 
 VOLUME /docker_shares/common
