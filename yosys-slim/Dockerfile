@@ -36,7 +36,8 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     python3 -m pip install --no-cache-dir wheel && \
-    pip install pytrellis
+    python3 -m pip install --ignore-installed --no-cache-dir pip && \
+    python3 -m pip install --ignore-installed --no-cache-dir requests
 
 # additional packages 
 RUN apt-get update && \
@@ -72,7 +73,10 @@ RUN apt-get update && \
     echo "Building nextpnr without gui" && \
     git clone https://github.com/YosysHQ/nextpnr.git && \
     cd nextpnr && \
-    cmake -DARCH=all -DBUILD_GUI=OFF . && \
+    cmake -DARCH=generic -DBUILD_GUI=OFF . && \
+    make -j2 && \
+    make install && \
+    cmake -DARCH=ice40 -DBUILD_GUI=OFF . && \
     make -j2 && \
     make install && \
     cd .. && \

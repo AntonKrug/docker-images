@@ -35,9 +35,12 @@ RUN apt-get update && \
     apt-get install -y clang clang-format clang-tidy clang-tools-7 && \
     git clone https://github.com/YosysHQ/nextpnr.git && \
     cd nextpnr && \
-    cmake -DARCH=all . && \
+    cmake -DARCH=generic . && \
     make -j2 && \
-    sudo make install && \
+    make install && \
+    cmake -DARCH=ice40 . && \
+    make -j2 && \
+    make install && \
     cd .. && \
     rm -rf nextpnr && \
     apt-get remove -y --purge clang clang-format clang-tidy clang-tools-7 && \
