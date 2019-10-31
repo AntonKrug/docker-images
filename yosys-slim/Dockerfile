@@ -35,7 +35,8 @@ RUN apt-get update && \
     apt-get install -y iverilog verilator && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
-    python3 -m pip install --no-cache-dir wheel
+    python3 -m pip install --no-cache-dir wheel && \
+    pip install pytrellis
 
 # additional packages 
 RUN apt-get update && \
