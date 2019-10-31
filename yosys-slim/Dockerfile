@@ -71,7 +71,7 @@ RUN apt-get update && \
     echo "Building nextpnr without gui" && \
     git clone https://github.com/YosysHQ/nextpnr.git && \
     cd nextpnr && \
-    cmake -DARCH=ice40 -DBUILD_GUI=OFF . && \
+    cmake -DBUILD_GUI=OFF . && \
     make -j2 && \
     make install && \
     cd .. && \
