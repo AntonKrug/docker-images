@@ -5,6 +5,11 @@ FROM ubuntu:16.04
 MAINTAINER Anton Krug <anton.krug@microchip.com>
 
 
+# wide privileges on new files, they can deleted easily from the mounted volumes
+RUN echo "" >> /etc/bash.bashrc && \
+    echo "umask 0000" >> /etc/bash.bashrc
+    
+
 RUN apt-get update && \
     apt-get install -y openssh-server sudo whois p7zip && \
     apt-get clean && \    

@@ -29,5 +29,11 @@ RUN apt-get update && \
 
 # Robot framework dependancies
 RUN python2.7 -m pip install --no-cache-dir robotframework netifaces requests psutil
+
+
+# wide privileges on new files, they can deleted easily from the mounted volumes
+RUN echo "" >> /etc/bash.bashrc && \
+    echo "umask 0000" >> /etc/bash.bashrc
+    
     
 VOLUME /docker_shares/common

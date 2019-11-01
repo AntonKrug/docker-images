@@ -10,6 +10,12 @@ ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=DontWarn
 ENV PATH="${PATH}:/opt/apache-maven-3.3.9/bin"
 ENV JAVA_HOME=/opt/jdk1.8.0_131/
 
+
+# wide privileges on new files, they can deleted easily from the mounted volumes
+RUN echo "" >> /etc/bash.bashrc && \
+    echo "umask 0000" >> /etc/bash.bashrc
+    
+
 RUN apt-get update && \
     apt-get -y install wget git unzip && \
     apt-get clean && \

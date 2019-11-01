@@ -25,5 +25,11 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 
+# wide privileges on new files, they can deleted easily from the mounted volumes
+RUN echo "" >> /etc/bash.bashrc && \
+    echo "umask 0000" >> /etc/bash.bashrc
+    
+
+
 VOLUME /docker_shares/common
 

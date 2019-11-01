@@ -31,5 +31,11 @@ RUN wget --no-check-certificate https://www.veripool.org/ftp/verilator-3.924.tgz
     verilator --version
 
 
+# wide privileges on new files, they can deleted easily from the mounted volumes
+RUN echo "" >> /etc/bash.bashrc && \
+    echo "umask 0000" >> /etc/bash.bashrc
+    
+
+
 VOLUME /docker_shares/common
 

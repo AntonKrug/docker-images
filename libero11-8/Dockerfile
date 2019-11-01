@@ -37,4 +37,9 @@ RUN yum -y check-update; \
     yum clean packages
 
 
+# wide privileges on new files, they can deleted easily from the mounted volumes
+RUN echo "" >> /etc/bash.bashrc && \
+    echo "umask 0000" >> /etc/bash.bashrc
+    
+
 VOLUME /docker_shares/common

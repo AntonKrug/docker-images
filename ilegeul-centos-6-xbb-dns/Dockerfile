@@ -19,5 +19,10 @@ MAINTAINER Anton Krug <anton.krug@microchip.com>
 
 RUN echo "nameserver 10.204.34.11" > /etc/resolv.conf 
 
+# wide privileges on new files, they can deleted easily from the mounted volumes
+RUN echo "" >> /etc/bash.bashrc && \
+    echo "umask 0000" >> /etc/bash.bashrc
+    
+
 
 VOLUME /docker_shares/common
