@@ -54,7 +54,7 @@ RUN apt-get update && \
 ADD start_vnc_server.sh /bin/start_vnc_server.sh
 RUN chmod a+x /bin/start_vnc_server.sh
 
-ADD nextprn_gui_demo.sh /bin/nextprn_gui_demo.sh
-RUN chmod a+x /bin/nextprn_gui_demo.sh
+ADD nextpnr_gui_demo.sh /bin/nextpnr_gui_demo.sh
+RUN chmod a+x /bin/nextpnr_gui_demo.sh
 
 VOLUME /docker_shares/common
