@@ -19,7 +19,7 @@ RUN echo "" >> /etc/bash.bashrc && \
 # https://stackoverflow.com/questions/6784463
 RUN apt-get update && \
     apt-get install -y software-properties-common sudo apt-transport-https ca-certificates && \
-    add-apt-repository -y ppa:openjdk-r/ppa && \
+    mkdir -p /usr/share/man/man1/ && \
     apt-get update && \
     apt-get install -y openjdk-8-jdk && \
     update-alternatives --config java && \
