@@ -56,4 +56,19 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/* 
 
 
+# Building and installing SpinalHDL's OpenOCD
+RUN apt-get update && \
+    apt-get install -y libtool automake libusb-1.0.0-dev texinfo libusb-dev libyaml-dev pkg-config && \
+    git clone https://github.com/SpinalHDL/openocd_riscv.git && \
+    cd openocd_riscv && \
+    ./bootstrap && \
+    ./configure --enable-ftdi --enable-dummy && \
+    make && \
+    make install && \
+    cd .. && \
+    rm -rf openocd_riscv && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* 
+
+
 VOLUME /docker_shares/common
