@@ -15,6 +15,13 @@ RUN echo "" >> /etc/bash.bashrc && \
     echo "umask 0000" >> /etc/bash.bashrc
 
 
+# getting base depedencies except the clang as that one is large
+RUN apt-get update && \
+    apt-get install -y build-essential wget git vim p7zip-full unzip cmake  && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*    
+
+
 RUN apt-get update && \
     apt-get install -y python3 python3-dev python3-pip && \
     apt-get install -y libboost-all-dev libeigen3-dev libevent-dev libjson-c-dev && \
