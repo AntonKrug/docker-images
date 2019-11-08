@@ -1,4 +1,4 @@
-# Litex migen
+# Litex migen, based on scala-sbt which contains x11, yosys ...
 FROM antonkrug/scala-sbt
 MAINTAINER Anton Krug <anton.krug@microchip.com>
 

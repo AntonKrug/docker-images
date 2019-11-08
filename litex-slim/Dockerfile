@@ -1,4 +1,4 @@
-# Litex migen slim variant
+# Litex migen slim variant, no scala-sbt, no x11
 FROM debian:9-slim
 MAINTAINER Anton Krug <anton.krug@microchip.com>
 
