@@ -29,7 +29,7 @@ RUN apt-get update && \
 
 # Misc tools (to compress the sources and upload them)
 RUN apt-get update && \
-    apt-get install -y p7zip-full curl && \
+    apt-get install -y p7zip-full curl zip && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
