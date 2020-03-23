@@ -3,6 +3,9 @@
 FROM debian:9-slim
 MAINTAINER Anton Krug <anton.krug@microchip.com>
 
+ENV DEBIAN_FRONTEND noninteractive
+ENV DEBCONF_NONINTERACTIVE_SEEN true
+
 # build-essential(make is needed by softconsole, gcc needed by renode) and few fundamental tools
 RUN apt-get update && \
     apt-get install -y build-essential wget git vim p7zip-full unzip && \
