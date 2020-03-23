@@ -5,6 +5,12 @@ MAINTAINER Anton Krug <anton.krug@microchip.com>
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV DEBCONF_NONINTERACTIVE_SEEN true
+ENV HOME=/root/
+
+# Fixing apt-key no tty issue:
+# https://stackoverflow.com/questions/53935949/apt-key-fails-recently-inside-docker
+# https://stackoverflow.com/questions/48162574/how-to-circumvent-apt-key-output-should-not-be-parsed
+ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=DontWarn
 
 # build-essential(make is needed by softconsole, gcc needed by renode) and few fundamental tools
 RUN apt-get update && \
@@ -19,11 +25,6 @@ RUN dpkg --add-architecture i386 && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
     
-# Fixing apt-key no tty issue:
-# https://stackoverflow.com/questions/53935949/apt-key-fails-recently-inside-docker
-# https://stackoverflow.com/questions/48162574/how-to-circumvent-apt-key-output-should-not-be-parsed
-ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=DontWarn
-
 # https://stackoverflow.com/questions/48162574/how-to-circumvent-apt-key-output-should-not-be-parsed
 # Renode dependancies
 RUN apt-get update && \
@@ -64,7 +65,5 @@ RUN apt-get update && \
 RUN echo "" >> /etc/bash.bashrc && \
     echo "umask 0000" >> /etc/bash.bashrc
 
-
-ENV HOME=/root/
 
 VOLUME /docker_shares/common
