@@ -3,6 +3,9 @@
 FROM antonkrug/softconsole-base-slim
 MAINTAINER Anton Krug <anton.krug@microchip.com>
 
+ENV DEBIAN_FRONTEND noninteractive
+ENV DEBCONF_NONINTERACTIVE_SEEN true
+
 # One of the ways to use the X11 is:
 # docker run --rm -it -e DISPLAY -v $XAUTHORITY:/root/.Xauthority --net=host antonkrug/softconsole-base
 
