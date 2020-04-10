@@ -1,4 +1,4 @@
-# All dependancies for SoftConsole install and X11-forwarding/VNC
+# Building static python with musl with gcc/clang
 
 FROM debian:9-slim
 MAINTAINER Anton Krug <anton.krug@microchip.com>
@@ -26,10 +26,38 @@ RUN apt-get update && \
 # Dependencies to build musl and python3
 RUN echo "deb-src http://ftp.ie.debian.org/debian/ stretch main contrib non-free" > /etc/apt/sources.list.d/strech-sources.list && \
     apt-get update && \
-    apt-get install -y xz-utils clang musl && \
+    apt-get install -y apt-utils xz-utils clang musl && \
     apt-get build-dep -y musl && \
     apt-get build-dep -y python3 && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*  
+
+ENV DIR_WORK /opt/python-static
+ENV DIR_MUSL /opt/python-static/musl
+ENV DIR_PYTHON /opt/python-static/python
+
+RUN mkdir -p "${DIR_WORK}"
+
+# Building musl-gcc
+RUN export CC="gcc-6" && \
+    cd "${DIR_WORK}" && \
+    wget "http://musl.libc.org/releases/musl-1.2.0.tar.gz" && \
+    tar -xzf musl-1.2.0.tar.gz && \
+    rm musl-1.2.0.tar.gz && \
+    cd musl-1.2.0 && \
+    ./configure --prefix="${DIR_MUSL}-gcc" --disable-shared && \
+    make && \
+    make install
+
+# Building musl-clang
+RUN export CC="clang-3.8" && \
+    cd "${DIR_WORK}" && \
+    wget "http://musl.libc.org/releases/musl-1.2.0.tar.gz" && \
+    tar -xzf musl-1.2.0.tar.gz && \
+    rm musl-1.2.0.tar.gz && \
+    cd musl-1.2.0 && \
+    ./configure --prefix="${DIR_MUSL}-clang" --disable-shared && \
+    make && \
+    make install
 
 VOLUME /docker_shares/common
