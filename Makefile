@@ -15,10 +15,10 @@ all: list $(SUBDIRS)
 
 
 # ----- Aliases/groups of targets ------
-all-without-softconsole-final: softconsole-base-images libero weak build-containers
+all-without-softconsole-final: softconsole-base-images build-containers libero weak
 
 
-softconsole-base-images: softconsole-base/. softconsole-base-slim/.
+softconsole-base-images: softconsole-base-slim/. softconsole-base/. 
 
 
 softconsole-final: softconsoleheadless/.
