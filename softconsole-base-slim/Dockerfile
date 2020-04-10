@@ -44,10 +44,14 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+# Setting timezone with using the json/exec form https://docs.docker.com/engine/reference/builder/
+# To solve problem with regular shell when redirection is used:
+# https://stackoverflow.com/questions/2462317/bash-syntax-error-redirection-unexpected
+RUN ["/bin/bash", "-c", "debconf-set-selections <<< \"tzdata tzdata/Areas select Europe\" && \
+                         debconf-set-selections <<< \"tzdata tzdata/Zones/Europe select Dublin\" "]
+
 # Timezone database
-RUN debconf-set-selections <<< "tzdata tzdata/Areas select Europe" && \
-    debconf-set-selections <<< "tzdata tzdata/Zones/Europe select Dublin" && \
-    apt-get update && \
+RUN apt-get update && \
     apt-get install -y tzdata && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
