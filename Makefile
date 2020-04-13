@@ -29,8 +29,8 @@ libero: libero11-8/.
 
 weak: weak-ubuntu16/.
 
-
-build-containers: python-static/. renode-builder/. verilator-lcov-slim/. verilator-slim/. verilator/. debian9.4-cmake-mingw/. code-styling/. documentation-builders/. ead/. ilegeul-centos-6-xbb-dns/. yosys/. yosys-slim/. scala-sbt-slim/. scala-sbt/. eclipse-plugin-maven/. litex/. litex-slim/.
+# temporary disabled containers: scala-sbt-slim/. scala-sbt/.
+build-containers: python-static/. renode-builder/. verilator-lcov-slim/. verilator-slim/. verilator/. debian9.4-cmake-mingw/. code-styling/. documentation-builders/. ead/. ilegeul-centos-6-xbb-dns/. yosys/. yosys-slim/. eclipse-plugin-maven/. litex/. litex-slim/.
 
 # build-containers which I temporary disabled ykush-controller-slim/. ykush-controller/.
 
