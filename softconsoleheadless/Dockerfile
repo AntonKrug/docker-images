@@ -12,17 +12,21 @@ RUN mkdir -p /opt/microsemi/imported_projects
 # will be re-cached, the common layers can be re-used, saving diskspace, network bandwith, speeding up downloads etc...
 ADD scLinux*/arm-none-eabi-gcc $SC_INSTALL_DIR/arm-none-eabi-gcc/
 ADD scLinux*/CMSIS $SC_INSTALL_DIR/CMSIS/
+ADD scLinux*/build_tools $SC_INSTALL_DIR/build_tools/
 ADD scLinux*/documentation $SC_INSTALL_DIR/documentation/
 ADD scLinux*/notices $SC_INSTALL_DIR/notices/
 ADD scLinux*/eclipse $SC_INSTALL_DIR/eclipse/
 ADD scLinux*/SoftConsole.xpm scLinux*/softconsole.sh $SC_INSTALL_DIR/
 ADD scLinux*/extras $SC_INSTALL_DIR/extras/
 ADD scLinux*/openocd $SC_INSTALL_DIR/openocd/
+ADD scLinux*/python3 $SC_INSTALL_DIR/python3/
 ADD scLinux*/gdbinit $SC_INSTALL_DIR/gdbinit/
 ADD scLinux*/fpServer $SC_INSTALL_DIR/fpServer/
 ADD scLinux*/riscv-unknown-elf-gcc $SC_INSTALL_DIR/riscv-unknown-elf-gcc/
+ADD scLinux*/ultrasoc $SC_INSTALL_DIR/ultrasoc/
 ADD scLinux*/renode $SC_INSTALL_DIR/renode/
 ADD scLinux*/renode-microchip-mods $SC_INSTALL_DIR/renode-microchip-mods
+ADD scLinux*/shortcuts $SC_INSTALL_DIR/shortcuts
 
 RUN ls -la $SC_INSTALL_DIR/
 
