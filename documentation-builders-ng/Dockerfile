@@ -10,7 +10,7 @@ RUN mkdir -p $VENDOR_DIR/bin
 
 ADD footer.html $VENDOR_DIR/
 ADD header.html $VENDOR_DIR/
-ADD generate_html $VENDOR_DIR/bin
+ADD generate_html $VENDOR_DIR/bin/
 
 # Get depedencies
 RUN apt-get update && \
