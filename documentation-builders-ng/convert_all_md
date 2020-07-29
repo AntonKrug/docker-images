@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -euo pipefail
+IFS=$'\n\t'
+
+FOLDER=${1:-/project}
+
+echo "Searching folder $FOLDER for all .md files and generating html for them"
+
+find $FOLDER -type f -name "*.md" -execdir sh -c 'generate_html "${0%.*}".md' {} \;

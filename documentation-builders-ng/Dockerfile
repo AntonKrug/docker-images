@@ -11,6 +11,7 @@ RUN mkdir -p $VENDOR_DIR/bin
 ADD footer.html $VENDOR_DIR/
 ADD header.html $VENDOR_DIR/
 ADD generate_html $VENDOR_DIR/bin/
+ADD convert_all_md $VENDOR_DIR/bin/
 
 # Get depedencies
 RUN apt-get update && \
@@ -48,6 +49,7 @@ RUN echo "" >> /etc/bash.bashrc && \
     echo "umask 0000" >> /etc/bash.bashrc
 
 RUN chmod a+x $VENDOR_DIR/bin/generate_html
+RUN chmod a+x $VENDOR_DIR/bin/convert_all_md
 
 VOLUME /docker_shares/common
 
