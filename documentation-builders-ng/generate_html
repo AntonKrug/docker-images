@@ -8,7 +8,7 @@ if [ $# -eq 0 ]; then
   exit 1
 fi
 
-file="${1%%.*}"
+file=`echo $1 | awk 'BEGIN{FS=OFS="."} NF--'`
 
 echo "Reading file $1 and generating $file.html"
 
