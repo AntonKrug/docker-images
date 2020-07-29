@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -euo pipefail
+IFS=$'\n\t'
+
+if [ $# -eq 0 ]; then
+  echo "generate_html requires a MD file as an argument, exiting..."
+  exit 1
+fi
+
+file="${1%%.*}"
+
+echo "Reading file $1 and generating $file.html"
+
+pandoc $1 -B $VENDOR_DIR/header.html -A $VENDOR_DIR/footer.html -o $file.html
+
