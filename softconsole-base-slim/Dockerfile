@@ -14,7 +14,7 @@ ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=DontWarn
 
 # build-essential(make is needed by softconsole, gcc needed by renode) and few fundamental tools
 RUN apt-get update && \
-    apt-get install -y build-essential wget git vim p7zip-full unzip && \
+    apt-get install -y build-essential wget git vim p7zip-full unzip curl && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*    
 

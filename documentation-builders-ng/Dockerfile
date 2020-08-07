@@ -15,7 +15,7 @@ ADD convert_all_md $VENDOR_DIR/bin/
 
 # Get depedencies
 RUN apt-get update && \
-    apt-get install -y git build-essential autoconf libxml2-utils cmake python3 python3-sphinx python3-pip flex bison texlive-latex-base texlive-base pandoc wget unzip docbook-xsl xsltproc curl && \
+    apt-get install -y git build-essential autoconf libxml2-utils cmake python3 python3-sphinx python3-pip flex bison texlive-latex-base texlive-base pandoc wget unzip docbook-xsl xsltproc && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     python3 -m pip install sphinx_tabs sphinxcontrib-svg2pdfconverter
