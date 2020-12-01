@@ -20,7 +20,7 @@ RUN apt-get update && \
     apt-get install -y graphviz && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
-    python3 -m pip install sphinx_tabs sphinxcontrib-svg2pdfconverter myst-parser
+    python3 -m pip install sphinx_tabs sphinxcontrib-svg2pdfconverter myst-parser sphinx_ops_theme
 
 # Build asciidoc    
 RUN wget https://github.com/asciidoc/asciidoc-py3/releases/download/9.0.2/asciidoc-9.0.2.zip && \
