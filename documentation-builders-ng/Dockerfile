@@ -15,12 +15,12 @@ ADD convert_all_md $VENDOR_DIR/bin/
 
 # Get depedencies
 RUN apt-get update && \
-    apt-get install -y git build-essential autoconf libxml2-utils cmake flex bison texlive-latex-base texlive-base texlive-full pandoc wget unzip docbook-xsl xsltproc && \
+    apt-get install -y git build-essential autoconf libxml2-utils cmake flex bison texlive-full pandoc wget unzip docbook-xsl xsltproc && \
     apt-get install -y python3 python3-sphinx python3-pip python3-requests && \
     apt-get install -y graphviz && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
-    python3 -m pip install sphinx_tabs sphinxcontrib-svg2pdfconverter myst-parser sphinx_ops_theme sphinxcontrib-wavedrom sphinx_pdj_theme git+https://github.com/bashtage/sphinx-material.git mkdocs sphinx-rtd-theme wild_sphinx_theme sphinx-panels pydata-sphinx-theme sphinx-book-theme
+    python3 -m pip install sphinx_tabs sphinxcontrib-svg2pdfconverter myst-parser sphinx_ops_theme sphinxcontrib-wavedrom sphinx_pdj_theme sphinx-rtd-theme wild_sphinx_theme sphinx-panels pydata-sphinx-theme sphinx-book-theme
 
 # Build asciidoc    
 RUN wget https://github.com/asciidoc/asciidoc-py3/releases/download/9.0.2/asciidoc-9.0.2.zip && \
