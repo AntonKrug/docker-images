@@ -33,8 +33,8 @@ weak: weak-ubuntu16/.
 # Target which will fail on RHEL 6.x
 newer-docker-host: documentation-builders-sphinxonly/.
 
-# temporary disabled containers: scala-sbt-slim/. scala-sbt/. yosys/. yosys-slim/. litex/. litex-slim/.
-build-containers: python-static/. renode-builder/. verilator-lcov-slim/. verilator-slim/. verilator/. debian9.4-cmake-mingw/. code-styling/. documentation-builders/. documentation-builders-ng/. ead/. ilegeul-centos-6-xbb-dns/. eclipse-plugin-maven/. 
+# temporary disabled containers: scala-sbt-slim/. scala-sbt/. yosys/. yosys-slim/. litex/. litex-slim/. code-styling/.
+build-containers: python-static/. renode-builder/. verilator-lcov-slim/. verilator-slim/. verilator/. debian9.4-cmake-mingw/. documentation-builders/. documentation-builders-ng/. ead/. ilegeul-centos-6-xbb-dns/. eclipse-plugin-maven/. 
 
 # build-containers which I temporary disabled ykush-controller-slim/. ykush-controller/.
 
