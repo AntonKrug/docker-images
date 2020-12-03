@@ -14,8 +14,9 @@ VARIABLES = '$$SOFTCONSOLE_INTRANET_BASE_URL $$SC_BASE_IMAGE'
 all: list $(SUBDIRS)
 
 
-# ----- Aliases/groups of targets ------
-all-without-softconsole-final: softconsole-base-images build-containers libero weak
+# ----- Aliases/groups of targets ------ 
+# Libero removed from targets as it is fairly old anyway 
+all-without-softconsole-final: softconsole-base-images build-containers weak
 
 
 softconsole-base-images: softconsole-base-slim/. softconsole-base/. 
@@ -24,7 +25,7 @@ softconsole-base-images: softconsole-base-slim/. softconsole-base/.
 softconsole-final: softconsoleheadless/.
 
 
-libero: libero11-8/.
+# libero: libero11-8/.
 
 
 weak: weak-ubuntu16/.
