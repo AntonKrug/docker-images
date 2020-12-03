@@ -19,8 +19,11 @@ RUN apt-get update && \
     apt-get install -y python3 python3-sphinx python3-pip python3-requests && \
     apt-get install -y graphviz libffi-dev libffi6 && \
     apt-get clean && \
-    rm -rf /var/lib/apt/lists/* && \
-    python3 -m pip install sphinx_tabs sphinxcontrib-svg2pdfconverter myst-parser sphinx_ops_theme sphinxcontrib-wavedrom sphinx_pdj_theme sphinx-rtd-theme wild_sphinx_theme sphinx-panels pydata-sphinx-theme
+    rm -rf /var/lib/apt/lists/*
+
+# Sphinx related extensions and themes
+RUN python3 -m pip install sphinx_tabs sphinxcontrib-svg2pdfconverter myst-parser sphinxcontrib-wavedrom sphinx-panels && \
+    python3 -m pip install sphinx_ops_theme sphinx_pdj_theme sphinx-rtd-theme wild_sphinx_theme pydata-sphinx-theme
 
 # Build asciidoc    
 RUN wget https://github.com/asciidoc/asciidoc-py3/releases/download/9.0.2/asciidoc-9.0.2.zip && \
