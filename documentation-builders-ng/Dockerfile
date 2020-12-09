@@ -16,14 +16,17 @@ ADD convert_all_md $VENDOR_DIR/bin/
 # Get depedencies
 RUN apt-get update && \
     apt-get install -y git build-essential autoconf libxml2-utils cmake flex bison texlive-full pandoc wget unzip docbook-xsl xsltproc && \
-    apt-get install -y python3 python3-sphinx python3-pip python3-requests && \
+    # apt-get install -y python3 python3-sphinx python3-pip python3-requests python3-yaml && \
+    apt-get install -y python3 python3-pip && \
     apt-get install -y graphviz libffi-dev libffi6 && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# Sphinx related extensions and themes
-RUN python3 -m pip install sphinx_tabs sphinxcontrib-svg2pdfconverter myst-parser sphinxcontrib-wavedrom sphinx-panels && \
-    python3 -m pip install sphinx_ops_theme sphinx_pdj_theme sphinx-rtd-theme wild_sphinx_theme pydata-sphinx-theme
+# Sphinx related extensions and themes (upgrading to newer sphinx)
+RUN python3 -m pip install --upgrade docutils sphinx pyyaml requests && \
+    python3 -m pip install --upgrade sphinx_tabs sphinxcontrib-svg2pdfconverter myst-parser sphinxcontrib-wavedrom sphinx-panels && \
+    python3 -m pip install --upgrade sphinx_ops_theme sphinx_pdj_theme sphinx-rtd-theme wild_sphinx_theme pydata-sphinx-theme && \
+
 
 # Build asciidoc    
 RUN wget https://github.com/asciidoc/asciidoc-py3/releases/download/9.0.2/asciidoc-9.0.2.zip && \
