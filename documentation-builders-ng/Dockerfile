@@ -16,7 +16,6 @@ ADD convert_all_md $VENDOR_DIR/bin/
 # Get depedencies
 RUN apt-get update && \
     apt-get install -y git build-essential autoconf libxml2-utils cmake flex bison texlive-full pandoc wget unzip docbook-xsl xsltproc && \
-    # apt-get install -y python3 python3-sphinx python3-pip python3-requests python3-yaml && \
     apt-get install -y python3 python3-pip && \
     apt-get install -y graphviz libffi-dev libffi6 && \
     apt-get clean && \

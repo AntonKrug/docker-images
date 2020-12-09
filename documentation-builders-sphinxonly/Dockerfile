@@ -6,7 +6,6 @@ MAINTAINER Anton Krug <anton.krug@microchip.com>
 # Get depedencies
 RUN apt-get update && \
     apt-get install -y flex git bison texlive-full docbook-xsl xsltproc && \
-    # apt-get install -y python3 python3-sphinx python3-pip python3-requests python3-yaml && \
     apt-get install -y python3 python3-pip && \
     apt-get install -y graphviz && \
     apt-get clean && \
