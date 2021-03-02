@@ -24,7 +24,8 @@ RUN apt-get update && \
 # Sphinx related extensions and themes (upgrading to newer sphinx)
 RUN python3 -m pip install --upgrade docutils sphinx pyyaml requests && \
     python3 -m pip install --upgrade sphinx_tabs sphinxcontrib-svg2pdfconverter myst-parser sphinxcontrib-wavedrom sphinx-panels sphinx-jinja sphinx-copybutton && \
-    python3 -m pip install --upgrade sphinx_ops_theme sphinx_pdj_theme sphinx-rtd-theme wild_sphinx_theme pydata-sphinx-theme
+    python3 -m pip install --upgrade sphinx_ops_theme sphinx_pdj_theme sphinx-rtd-theme wild_sphinx_theme pydata-sphinx-theme && \
+    python3 -m pip install --upgrade sphinx-documatt-theme guzzle_sphinx_theme sphinx_bootstrap_theme 
 
 
 # Build asciidoc    
