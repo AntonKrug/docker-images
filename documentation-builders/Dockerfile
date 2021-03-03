@@ -3,7 +3,7 @@
 FROM debian:9-slim
 MAINTAINER Anton Krug <anton.krug@microchip.com>
 
-RUN apt-get update && apt-get install -y git build-essential cmake python python-sphinx flex bison texlive-latex-base texlive-base && \
+RUN apt-get update && apt-get install -y git build-essential cmake python python-sphinx flex bison texlive-latex-base texlive-base tree && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     git clone https://github.com/doxygen/doxygen.git && \
