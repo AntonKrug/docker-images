@@ -12,7 +12,6 @@ RUN mkdir -p /opt/microsemi/imported_projects
 # will be re-cached, the common layers can be re-used, saving diskspace, network bandwith, speeding up downloads etc...
 ADD scLinux*/arm-none-eabi-gcc $SC_INSTALL_DIR/arm-none-eabi-gcc/
 ADD scLinux*/CMSIS $SC_INSTALL_DIR/CMSIS/
-ADD scLinux*/build_tools $SC_INSTALL_DIR/build_tools/
 ADD scLinux*/documentation $SC_INSTALL_DIR/documentation/
 ADD scLinux*/notices $SC_INSTALL_DIR/notices/
 ADD scLinux*/eclipse $SC_INSTALL_DIR/eclipse/
