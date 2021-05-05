@@ -5,7 +5,7 @@ MAINTAINER Anton Krug <anton.krug@microchip.com>
 
 # Get depedencies
 RUN apt-get update && \
-    apt-get install -y flex git bison texlive-full docbook-xsl xsltproc tree && \
+    apt-get install -y flex curl git bison texlive-full docbook-xsl xsltproc tree && \
     apt-get install -y python3 python3-pip && \
     apt-get install -y graphviz && \
     curl --silent https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - && \    
