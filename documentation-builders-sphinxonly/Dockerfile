@@ -17,7 +17,7 @@ RUN apt-get update && \
     python3 -m pip install --upgrade docutils sphinx pyyaml requests formic2 && \
     python3 -m pip install --upgrade sphinx_tabs sphinxcontrib-svg2pdfconverter myst-parser sphinxcontrib-wavedrom sphinx-panels sphinx-jinja sphinx-copybutton && \
     python3 -m pip install --upgrade sphinx_ops_theme sphinx_pdj_theme sphinx-rtd-theme wild_sphinx_theme pydata-sphinx-theme && \
-    python3 -m pip install --upgrade git+https://github.com/bashtage/sphinx-material.git sphinx-book-theme sphinx-documatt-theme guzzle_sphinx_theme sphinx_bootstrap_theme
+    python3 -m pip install --upgrade git+https://github.com/bashtage/sphinx-material.git sphinx-book-theme sphinx-documatt-theme guzzle_sphinx_theme sphinx_bootstrap_theme && \
     npm install wavedrom-cli --global && \
     wavedrom-cli --version
 
