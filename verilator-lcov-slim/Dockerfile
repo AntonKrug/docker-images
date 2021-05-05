@@ -6,6 +6,7 @@ MAINTAINER Anton Krug <anton.krug@microchip.com>
 # Get all dependancies, install nodejs. Get, build and install verilator and clean behind itself in 1 step/layer
 RUN apt-get update && \
     apt-get install -y --no-install-recommends wget xz-utils curl sudo lcov gnupg2 git autoconf build-essential autoconf autoconf flex bison ca-certificates && \
+    sudo curl --silent https://deb.nodesource.com/gpgkey/nodesource.gpg.key | sudo apt-key add - && \
     sudo curl -sL https://deb.nodesource.com/setup_12.x | bash - && \
     apt-get install -y nodejs && \
     node -v && \

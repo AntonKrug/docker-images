@@ -12,6 +12,7 @@ RUN apt-get update && \
 
 # Install nodejs
 RUN apt-get update && \
+    sudo curl --silent https://deb.nodesource.com/gpgkey/nodesource.gpg.key | sudo apt-key add - && \
     sudo curl -sL https://deb.nodesource.com/setup_12.x | bash - && \
     apt-get install -y nodejs && \
     apt-get clean && \
