@@ -27,6 +27,18 @@ RUN python3 -m pip install --upgrade docutils sphinx pyyaml requests formic2 && 
     python3 -m pip install --upgrade sphinx_ops_theme sphinx_pdj_theme sphinx-rtd-theme wild_sphinx_theme pydata-sphinx-theme && \
     python3 -m pip install --upgrade sphinx-documatt-theme guzzle_sphinx_theme sphinx_bootstrap_theme
 
+# Get nodejs for the wavedrom-cli
+RUN apt-get update && \
+    curl --silent https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - && \    
+    curl -fsSL https://deb.nodesource.com/setup_14.x | bash - && \
+    apt-get install -y nodejs && \
+    node -v && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# Get the CLI wavedrom, not just the python wavedrom
+RUN sudo npm install wavedrom-cli --global && \
+    wavedrom-cli --version
 
 # Build asciidoc    
 RUN wget https://github.com/asciidoc/asciidoc-py3/releases/download/9.0.2/asciidoc-9.0.2.zip && \
