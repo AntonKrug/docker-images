@@ -37,7 +37,8 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Get the CLI wavedrom, not just the python wavedrom
-RUN sudo npm install wavedrom-cli --global && \
+RUN npm -g config set user root && \
+    npm install wavedrom-cli --global && \
     wavedrom-cli --version
 
 # Build asciidoc    
