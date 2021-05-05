@@ -10,7 +10,7 @@ The containers are tagged automatically with the commit hash that triggered thei
 
 The following containers are used for the following:
  
- - **documentation-builders-ng** To generate SoftConsole (and related) documentation and deploy it to ReadTheDocs or GitHub pages. Compared to the previous **documentation-builders** containers, these are python3 based instead of python2.
+ - **documentation-builders-ng** To generate SoftConsole (and related) documentation and deploy it to ReadTheDocs or GitHub pages. Compared to the previous **documentation-builders** containers, these are python3 based instead of python2. It can be used on documentation for a whole project and also quickly applied on single file readme's to generate single page self-contained HTMLs/PDFs
 
  - **ead** A tool which can apply hexdumps in bulk and produce C/H files for easy integration with C projects
 
