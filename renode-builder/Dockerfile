@@ -21,8 +21,8 @@ RUN apt-get update && \
 
 # Get all apt dependancies for building the package
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends git automake autoconf libtool g++ realpath policykit-1 libgtk2.0-dev screen uml-utilities gtk-sharp2 python2.7 && \
-    apt-get install -y --no-install-recommends python-pip python-setuptools python-dev ruby ruby-dev build-essential rpm bsdtar && \
+    apt-get install -y --no-install-recommends git automake autoconf libtool g++ realpath policykit-1 libgtk2.0-dev screen uml-utilities gtk-sharp2 python3 && \
+    apt-get install -y --no-install-recommends python3-pip python3-setuptools python3-dev ruby ruby-dev build-essential rpm bsdtar && \
     gem install fpm && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
@@ -34,7 +34,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Robot framework dependancies
-RUN python2.7 -m pip install --no-cache-dir robotframework netifaces requests psutil
+RUN python3 -m pip install --no-cache-dir robotframework netifaces requests psutil
 
 
 # wide privileges on new files, they can deleted easily from the mounted volumes
