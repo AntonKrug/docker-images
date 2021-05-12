@@ -4,7 +4,7 @@ FROM debian:9-slim
 MAINTAINER Anton Krug <anton.krug@microchip.com>
 
 
-RUN dpkg --add-architecture i386 && apt-get update && apt-get install -y build-essential gcc-multilib g++-multilib libc6-dev-i386 gdb-multiarch gcc-mingw-w64-i686 wget && \
+RUN dpkg --add-architecture i386 && apt-get update && apt-get install -y build-essential gcc-multilib g++-multilib libc6-dev-i386 gdb-multiarch gcc-mingw-w64-i686 wget dos2unix && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 

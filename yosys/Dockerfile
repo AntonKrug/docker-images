@@ -10,7 +10,7 @@ ENV DISPLAY=:1
 
 # Additional packages on top of slim variant
 RUN apt-get update && \
-    apt-get install -y debconf aptitude net-tools systemd && \
+    apt-get install -y debconf aptitude net-tools systemd dos2unix && \
     apt-get install -y mc htop && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*

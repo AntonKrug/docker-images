@@ -18,7 +18,7 @@ RUN echo "" >> /etc/bash.bashrc && \
 # getting java jdk 8
 # https://stackoverflow.com/questions/6784463
 RUN apt-get update && \
-    apt-get install -y software-properties-common sudo apt-transport-https ca-certificates && \
+    apt-get install -y software-properties-common sudo apt-transport-https ca-certificates dos2unix && \
     mkdir -p /usr/share/man/man1/ && \
     apt-get update && \
     apt-get install -y openjdk-8-jdk && \

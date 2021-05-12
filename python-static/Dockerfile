@@ -19,7 +19,7 @@ RUN echo "" >> /etc/bash.bashrc && \
 
 # Some basic tools such as gcc
 RUN apt-get update && \
-    apt-get install -y build-essential wget git vim p7zip-full unzip && \
+    apt-get install -y build-essential wget git vim p7zip-full unzip dos2unix && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*    
 

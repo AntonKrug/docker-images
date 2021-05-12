@@ -19,7 +19,7 @@ RUN echo "" >> /etc/bash.bashrc && \
 
 # getting base depedencies except the clang as that one is large
 RUN apt-get update && \
-    apt-get install -y build-essential wget git vim p7zip-full unzip cmake  && \
+    apt-get install -y build-essential wget git vim p7zip-full unzip cmake dos2unix && \
     apt-get install -y libhidapi-libusb0 libusb-1.0-0-dev libusb-1.0-0 libudev-dev libudev1 && \
     apt-get install -y ftdi-eeprom libftdi-dev libffi-dev libreadline-dev tcl-dev && \   
     apt-get clean && \

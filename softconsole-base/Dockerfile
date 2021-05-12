@@ -18,7 +18,7 @@ ENV DEBCONF_NONINTERACTIVE_SEEN true
 RUN apt-get update && \
     echo "wireshark-common	wireshark-common/install-setuid	boolean	false" | debconf-set-selections && \
     mkdir -p /usr/share/man/man1 && \
-    apt-get install -y xdg-utils mc net-tools aptitude p7zip-full firefox-esr gedit x11-apps x11vnc xvfb systemd wireshark && \
+    apt-get install -y xdg-utils mc net-tools aptitude p7zip-full firefox-esr gedit x11-apps x11vnc xvfb systemd wireshark dos2unix && \
     apt-get install -y wmctrl xserver-xephyr xnest metacity xvfb fluxbox && \
     apt-get install -y default-jre default-jdk default-jdk-headless && \
     apt-get install -y pandoc texlive-xetex texlive-fonts-recommended lmodern && \

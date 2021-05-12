@@ -11,7 +11,7 @@ RUN echo "" >> /etc/bash.bashrc && \
     
 
 RUN apt-get update && \
-    apt-get install -y openssh-server sudo whois p7zip && \
+    apt-get install -y openssh-server sudo whois p7zip dos2unix && \
     apt-get clean && \    
     rm -rf /var/lib/apt/lists/*
 

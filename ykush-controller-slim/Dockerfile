@@ -6,7 +6,7 @@ MAINTAINER Anton Krug <anton.krug@microchip.com>
 
 # Get all dependancies, compile, install and wipe after finished
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends build-essential git wget unzip sudo libusb-1.0-0-dev libusb-1.0-0 libudev-dev libudev1 && \
+    apt-get install -y --no-install-recommends build-essential git wget unzip sudo libusb-1.0-0-dev libusb-1.0-0 libudev-dev libudev1 dos2unix && \
     apt-get clean && \
     wget --no-check-certificate https://www.yepkit.com/uploads/documents/68548_ykushcmd_master_20171130.zip && \
     unzip *.zip && \

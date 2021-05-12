@@ -17,7 +17,7 @@ RUN echo "" >> /etc/bash.bashrc && \
     
 
 RUN apt-get update && \
-    apt-get -y install wget git unzip && \
+    apt-get -y install wget git unzip dos2unix && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*    
 

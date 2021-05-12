@@ -27,6 +27,11 @@ The following containers are used for the following:
  - **ykush-controller-slim** Controler software to manipulate programmable USB hubs: https://www.yepkit.com/product/300110/YKUSH3
   Useful for RHEL 6.x which couldn't build this tool natively
 
+
+# Why some packages are included
+
+- dos2unix Set of new-line conversion tools, allowing to have shared outter host scripts with the inner container, yet use different line endings. This could be done on the host side and force encoding for one or the other OS. However the host scripts could be made to work from Linux or from shared Windows drive running WSL with the Docker for Windows (and could be invoked from both Linux and Windows machines). With the dos2unix the newlines can be convereted on each script before invoking it to make sure the new lines are as expected no matter what the host enviroment is.
+
 # Base image and compatibility
 
 The base image on most containers is upto Debian 9, newer base containers is often avoided as they wouldn't have kernel compatible with older RHEL 6.x kernel (and Docker 1.7 which is the latest version avaiable for this platform). By limiting the base images this gurantees compatibility acroos many host OSs (including legacy OSs).

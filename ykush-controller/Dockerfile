@@ -6,7 +6,7 @@ MAINTAINER Anton Krug <anton.krug@microchip.com>
 
 # Get all dependancies
 RUN apt-get update && \
-    apt-get install -y build-essential git wget unzip sudo libusb-1.0-0-dev libusb-1.0-0 libudev-dev libudev1 && \
+    apt-get install -y build-essential git wget unzip sudo libusb-1.0-0-dev libusb-1.0-0 libudev-dev libudev1 dos2unix && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 

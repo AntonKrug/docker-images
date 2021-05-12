@@ -3,7 +3,7 @@
 FROM debian:9-slim
 MAINTAINER Anton Krug <anton.krug@microchip.com>
 
-RUN apt-get update && apt-get install -y clang-format python python-pip && \
+RUN apt-get update && apt-get install -y clang-format python python-pip dos2unix && \
     pip install --no-cache-dir cpplint && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
