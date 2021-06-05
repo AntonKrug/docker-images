@@ -65,6 +65,9 @@ RUN python2.7 -m pip install --no-cache-dir wheel
 # Additional Robot framework plugins
 RUN python2.7 -m pip install --no-cache-dir robotframework-seriallibrary robotframework-datadriver
 
+# Adding HSS dependencies kconfiglib
+RUN python2.7 -m pip install kconfiglib
+
 # This container has already root access (without sudo), but this for scripts which assume the sudo is installed
 RUN apt-get update && \
     apt-get install -y --no-install-recommends sudo debconf && \
