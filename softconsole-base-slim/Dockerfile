@@ -95,8 +95,4 @@ RUN apt-get update && \
 RUN echo "" >> /etc/bash.bashrc && \
     echo "umask 0000" >> /etc/bash.bashrc
 
-EXPOSE 22      # SSH
-EXPOSE 5999    # websocket proxy
-EXPOSE 8080    # lightweight HTTP server
-
 VOLUME /docker_shares/common
