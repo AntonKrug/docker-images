@@ -44,21 +44,6 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# SSH server so the container can be accessed from outside interactively. And NodeJS to build SSH client
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends openssh-server && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* && \
-    mkdir -p /opt/bin && \
-    cd /opt && \
-    wget https://nodejs.org/dist/v14.17.0/node-v14.17.0-linux-x64.tar.xz && \
-    tar vxf node-v14.17.0-linux-x64.tar.xz && \
-    rm node-*.tar.xz && \
-    cd bin && \
-    ln -s ../node-v14.17.0-linux-x64/bin/npm npm && \
-    ln -s ../node-v14.17.0-linux-x64/bin/npx npx && \
-    ln -s ../node-v14.17.0-linux-x64/bin/node node
-
 # Setting timezone with using the json/exec form https://docs.docker.com/engine/reference/builder/
 # To solve problem with regular shell when redirection is used:
 # https://stackoverflow.com/questions/2462317/bash-syntax-error-redirection-unexpected
