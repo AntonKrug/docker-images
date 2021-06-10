@@ -14,10 +14,11 @@ ADD generate_html $VENDOR_DIR/bin/
 ADD convert_all_md $VENDOR_DIR/bin/
 
 # Get depedencies
+# librsvg2-bin resolved the: WARNING: RSVG converter command 'rsvg-convert' cannot be run. Check the rsvg_converter_bin setting
 RUN apt-get update && \
     apt-get install -y git build-essential autoconf libxml2-utils cmake flex bison texlive-full pandoc curl wget unzip docbook-xsl xsltproc tree && \
     apt-get install -y python3 python3-pip && \
-    apt-get install -y graphviz libffi-dev libffi6 dos2unix && \
+    apt-get install -y graphviz libffi-dev libffi6 dos2unix librsvg2-bin && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
