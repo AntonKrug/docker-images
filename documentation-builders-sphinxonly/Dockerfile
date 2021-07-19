@@ -15,7 +15,7 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     python3 -m pip install --upgrade docutils sphinx pyyaml requests formic2 && \
-    python3 -m pip install --upgrade sphinx_tabs sphinxcontrib-svg2pdfconverter myst-parser sphinxcontrib-wavedrom sphinx-panels sphinx-jinja sphinx-copybutton sphinx-charts sphinx-multiversion && \
+    python3 -m pip install --upgrade sphinx_tabs sphinxcontrib-svg2pdfconverter myst-parser sphinxcontrib-wavedrom sphinx-panels sphinx-jinja sphinx-copybutton sphinx-charts sphinx-multiversion readthedocs-sphinx-search && \
     python3 -m pip install --upgrade sphinx_ops_theme sphinx_pdj_theme sphinx-rtd-theme wild_sphinx_theme pydata-sphinx-theme && \
     python3 -m pip install --upgrade git+https://github.com/bashtage/sphinx-material.git sphinx-book-theme sphinx-documatt-theme guzzle_sphinx_theme sphinx_bootstrap_theme && \
     npm -g config set user root && \
