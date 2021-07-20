@@ -23,7 +23,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Sphinx related extensions and themes (upgrading to newer sphinx)
-RUN python3 -m pip install --upgrade docutils sphinx pyyaml requests formic2 gitpython && \
+RUN python3 -m pip install --upgrade docutils sphinx pyyaml requests formic2 gitpython pyOpenSSL && \
     python3 -m pip install --upgrade sphinx_tabs sphinxcontrib-svg2pdfconverter myst-parser sphinxcontrib-wavedrom sphinx-panels sphinx-jinja sphinx-copybutton sphinx-multiversion && \
     python3 -m pip install --upgrade sphinx_ops_theme sphinx_pdj_theme sphinx-rtd-theme wild_sphinx_theme pydata-sphinx-theme && \
     python3 -m pip install --upgrade sphinx-documatt-theme guzzle_sphinx_theme sphinx_bootstrap_theme && \
